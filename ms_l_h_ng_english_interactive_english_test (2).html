@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Tiếng Anh Siêu Cấp - Ms Lê Hằng English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --bg-teal: #00B4A2;
+            --dark-teal: #00796B;
+            --emerald: #00A699;
+            --glass-white: rgba(255, 255, 255, 0.2);
+            --correct: #00D26A;
+            --wrong: #FF4757;
+            --accent-yellow: #FDCB6E;
+            --accent-orange: #FF8F00;
+            --ipa-bg: #F3E5F5;
+            --ipa-text: #7B1FA2;
+            --eng-blue: #1976D2;
+            --vn-red: #D84315;
+            --primary: #8854C0;
+        }
+
+        body {
+            font-family: 'Quicksand', 'Nunito', sans-serif;
+            background: linear-gradient(-45deg, #00A699, #00B4A2, #8854C0, #FDCB6E);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            min-height: 100vh;
+            color: #2D3748;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating green environment and math/stars pattern */
+        .decor-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.12;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M15 15 L20 25 L10 25 Z M50 60 C55 50, 65 50, 70 60 Z M65 20 A8 8 0 1 1 65 20.1 Z'/%3E%3C/g%3E%3C/svg%3E");
+            animation: backgroundFloat 30s linear infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0% { background-position: 0 0; }
+            100% { background-position: 500px 1000px; }
+        }
+
+        .btn-3d {
+            transition: all 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 0px rgba(0,0,0,0.15);
+        }
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0px rgba(0,0,0,0.15);
+        }
+        .btn-answer {
+            background-color: #E0F2F1;
+            color: #1A365D;
+            transition: all 0.1s ease;
+            box-shadow: 0 6px 0px #B2DFDB;
+        }
+        .btn-answer:hover:not(.disabled) {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 0px #B2DFDB;
+            background-color: #F4FBFB;
+        }
+        .btn-answer:active:not(.disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px #B2DFDB;
+        }
+        .btn-answer.correct {
+            background-color: var(--correct) !important;
+            color: white !important;
+            box-shadow: 0 6px 0px #009624 !important;
+        }
+        .btn-answer.wrong {
+            background-color: var(--wrong) !important;
+            color: white !important;
+            box-shadow: 0 6px 0px #C2185B !important;
+        }
+
+        /* Responsive Glassmorphism main card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Warning alert box */
+        .warning-box {
+            background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+            border: 3px solid #FBC02D;
+            border-radius: 24px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+        }
+
+        /* Shake animation for wrong selection */
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        /* Tab states */
+        .tab-btn {
+            background-color: rgba(255, 255, 255, 0.4);
+            color: #1A3038;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .tab-btn.active {
+            background-color: var(--dark-teal) !important;
+            color: white !important;
+            box-shadow: 0 4px 0 #004D40 !important;
+            transform: translateY(2px);
+        }
+
+        /* Explanation Box style matching standard */
+        .explanation-box {
+            background: #FFFFFF;
+            border-left: 10px solid var(--accent-orange);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
+            animation: slideDown 0.35s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .banner-instruction {
+            background-color: #FFF9C4;
+            border: 2px dashed var(--accent-orange);
+            border-radius: 12px;
+            color: #E65100;
+        }
+
+        /* Canvas particles */
+        #confetti-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Interactive Phone simulation & Sign layouts */
+        .sale-sign {
+            background: linear-gradient(135deg, #FF4757, #EE5253);
+            border: 4px solid #FFF;
+            box-shadow: 0 8px 0 #D63031, 0 12px 20px rgba(0,0,0,0.15);
+            transform: rotate(-3deg);
+        }
+        .phone-chat {
+            background: #FFF;
+            border: 8px solid #2C3E50;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="pb-24">
+
+    <div class="decor-pattern"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container mx-auto px-4 max-w-4xl pt-6">
+        <!-- Teacher small title & main header -->
+        <header class="text-center mb-6">
+            <div class="inline-flex items-center gap-2 bg-emerald-800/40 text-white py-1 px-4 rounded-full text-xs font-black mb-2 shadow-sm border border-white/20">
+                <i class="fa-solid fa-chalkboard-user text-yellow-300"></i> Giáo viên tạo: Ms Lê Hằng English
+            </div>
+            <h1 class="text-2xl md:text-3.5xl font-black text-white drop-shadow-[0_3px_0_rgba(0,0,0,0.15)] tracking-wide">
+                🌟 Ôn Tập Tiếng Anh Siêu Cấp 🌟
+            </h1>
+        </header>
+
+        <!-- Warning box -->
+        <div class="warning-box p-5 md:p-6 mb-8 text-center">
+            <h3 class="text-lg font-black text-amber-800 flex justify-center items-center gap-2 mb-2">
+                <i class="fa-solid fa-triangle-exclamation text-xl text-red-500 animate-bounce"></i> 
+                LỜI NHẮC CỰC KỲ QUAN TRỌNG
+                <i class="fa-solid fa-triangle-exclamation text-xl text-red-500 animate-bounce"></i>
+            </h3>
+            <p class="text-amber-900 font-bold text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+                Chỉ có <span class="text-red-500 underline decoration-2">đọc kỹ giải thích ngay sau mỗi câu</span>, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên.
+            </p>
+            <p class="text-amber-800 font-bold text-xs md:text-sm mt-2">
+                Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích!
+            </p>
+            <div class="mt-3 text-purple-700 font-black tracking-widest text-xs animate-pulse">
+                * Kéo tới đâu, làm tới đó! *
+            </div>
+        </div>
+
+        <!-- Dynamic Tabs selector to separate questions cleanly -->
+        <div class="mb-8">
+            <p class="text-white font-black text-center mb-3 drop-shadow text-xs tracking-wider uppercase">
+                <i class="fa-solid fa-folder-open"></i> Chọn phần thi bài tập dưới đây:
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 bg-black/25 p-2 rounded-3xl backdrop-blur-md" id="tabs-container">
+                <!-- Tabs generated dynamically -->
+            </div>
+        </div>
+
+        <!-- Main Workspace card -->
+        <main class="glass-card p-6 md:p-8 relative min-h-[400px]">
+            <div id="exercise-workspace" class="transition-all duration-300">
+                <!-- Current questions show here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Dropdown / Choice selector overlay for gap-fill & matching -->
+    <div id="dropdown-overlay" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-md border-4 border-emerald-500 shadow-2xl transform scale-95 transition-transform duration-200" id="popup-box">
+            <h4 class="text-emerald-700 font-black text-lg text-center mb-4 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-question text-yellow-400"></i> Lựa chọn đáp án chính xác:
+            </h4>
+            <div class="space-y-2" id="popup-choices-anchor">
+                <!-- Options appear here -->
+            </div>
+            <button class="w-full mt-4 bg-gray-200 text-gray-700 font-bold py-2.5 rounded-xl border-b-4 border-gray-400 active:border-b-0 active:translate-y-1 transition-all text-sm" onclick="closeDropdown()">
+                Đóng lại
+            </button>
+        </div>
+    </div>
+
+    <footer class="fixed bottom-0 left-0 w-full bg-white/90 border-t-4 border-emerald-600 px-4 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.15)] flex items-center justify-between gap-4 z-40 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <div class="bg-yellow-100 text-amber-800 py-1.5 px-4 rounded-2xl flex items-center gap-2 font-black text-xs md:text-sm border border-yellow-300 shadow-sm">
+                <i class="fa-solid fa-star text-yellow-400 animate-spin-slow"></i>
+                <span>Điểm của con: <span id="footer-score-text" class="text-emerald-600 text-lg">0</span></span>
+            </div>
+            <!-- Progress indicator -->
+            <div class="hidden sm:block w-40 md:w-64 bg-gray-200 h-4 rounded-full overflow-hidden shadow-inner border border-gray-300">
+                <div class="bg-gradient-to-r from-emerald-400 to-green-400 h-full w-0 transition-all duration-300 rounded-full" id="footer-progress-bar"></div>
+            </div>
+        </div>
+        <button onclick="submitFinal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-black px-6 py-2.5 rounded-2xl shadow-[0_5px_0px_#059669] hover:brightness-110 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-xs md:text-sm">
+            <i class="fa-solid fa-square-check"></i> TỔNG KẾT KẾT QUẢ
+        </button>
+    </footer>
+
+    <!-- Comprehensive Result popup modal -->
+    <div id="result-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-[32px] p-6 md:p-8 w-full max-w-lg border-4 border-emerald-400 shadow-2xl text-center">
+            <div class="text-5xl mb-3">👩‍🏫</div>
+            <h3 class="text-xl md:text-2xl font-black text-teal-700 mb-2">Ms Lê Hằng English Đánh Giá</h3>
+            <div class="bg-teal-50 p-4 rounded-2xl border-2 border-dashed border-teal-200 mb-4">
+                <p class="text-gray-500 font-bold text-sm">Điểm số đạt được:</p>
+                <p class="text-4xl font-extrabold text-emerald-500 animate-bounce" id="modal-score-percent">0%</p>
+                <p class="text-xs text-teal-600 mt-1 font-bold" id="modal-score-fraction">(0/0 câu đúng)</p>
+            </div>
+            <p class="text-gray-700 font-bold text-sm md:text-base mb-6 leading-relaxed max-h-48 overflow-y-auto" id="modal-comment"></p>
+            <div class="flex gap-3">
+                <button onclick="restartTest()" class="flex-1 bg-yellow-400 text-amber-950 border-b-4 border-yellow-600 font-black py-3 rounded-2xl active:translate-y-1 active:border-b-0 transition-all text-sm">
+                    Làm lại bài <i class="fa-solid fa-rotate"></i>
+                </button>
+                <button onclick="closeResultModal()" class="flex-1 bg-gray-200 text-gray-700 border-b-4 border-gray-400 font-black py-3 rounded-2xl active:translate-y-1 active:border-b-0 transition-all text-sm">
+                    Xem lại đáp án
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WEB AUDIO API SYNTHESIZER
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playSound(type) {
+            try {
+                if (!audioCtx) audioCtx = new AudioContextClass();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    // Chime ding ding
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+
+                    setTimeout(() => {
+                        const osc2 = audioCtx.createOscillator();
+                        const gain2 = audioCtx.createGain();
+                        osc2.connect(gain2);
+                        gain2.connect(audioCtx.destination);
+                        osc2.type = 'sine';
+                        osc2.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
+                        gain2.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                        osc2.start();
+                        osc2.stop(audioCtx.currentTime + 0.25);
+                    }, 100);
+                } else if (type === 'wrong') {
+                    // Buzz
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(85, audioCtx.currentTime + 0.35);
+                    gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.35);
+                }
+            } catch (err) {
+                console.log("Audio synthesis error: ", err);
+            }
+        }
+
+        // CONFETTI RAIN ENGINE
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let confettis = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function spawnConfetti() {
+            confettis = [];
+            for (let i = 0; i < 70; i++) {
+                confettis.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 8 + 5,
+                    color: ['#00C9A7', '#8854C0', '#FDCB6E', '#00D26A', '#FF4757'][Math.floor(Math.random() * 5)],
+                    speedY: Math.random() * 4 + 3,
+                    speedX: Math.random() * 4 - 2,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 5 - 2.5
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+            confettis.forEach(c => {
+                c.y += c.speedY;
+                c.x += c.speedX;
+                c.rotation += c.rotationSpeed;
+                if (c.y < canvas.height) {
+                    alive = true;
+                    ctx.save();
+                    ctx.translate(c.x, c.y);
+                    ctx.rotate(c.rotation * Math.PI / 180);
+                    ctx.fillStyle = c.color;
+                    ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size);
+                    ctx.restore();
+                }
+            });
+            if (alive) requestAnimationFrame(animateConfetti);
+        }
+
+        const database = {
+            "ex3": {
+                title: "Exercise 3: Choose the odd one out in each group",
+                desc: "Tìm từ khác biệt hoàn toàn về nghĩa, cấu trúc hoặc loại từ với các từ còn lại.",
+                questions: [
+                    {
+                        id: "ex3_1",
+                        q: "A. website | B. Facebook | C. YouTube | D. Instagram",
+                        options: ["website", "Facebook", "YouTube", "Instagram"],
+                        answer: "website",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>website</span> <span class='exp-ipa'>[ /ˈwebsaɪt/ ]</span>: trang web nói chung.<br>• <span class='exp-word'>Facebook</span> <span class='exp-ipa'>[ /ˈfeɪsbʊk/ ]</span>: mạng xã hội cụ thể.<br>• <span class='exp-word'>YouTube</span> <span class='exp-ipa'>[ /ˈjuːtjuːb/ ]</span>: nền tảng video cụ thể.<br>• <span class='exp-word'>Instagram</span> <span class='exp-ipa'>[ /ˈɪnstəɡræm/ ]</span>: mạng xã hội chia sẻ ảnh cụ thể.<br>2. Dịch nghĩa toàn câu: 'Chọn từ khác loại: website, Facebook, YouTube, Instagram'.<br>3. Tại sao chọn website? Vì 'website' là danh từ chung chỉ trang mạng điện tử, 3 đáp án còn lại là tên cụ thể của các mạng xã hội lớn."
+                    },
+                    {
+                        id: "ex3_2",
+                        q: "A. volleyball | B. chess | C. sports | D. football",
+                        options: ["volleyball", "chess", "sports", "football"],
+                        answer: "sports",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>volleyball</span> <span class='exp-ipa'>[ /ˈvɒlibɔːl/ ]</span>: bóng chuyền.<br>• <span class='exp-word'>chess</span> <span class='exp-ipa'>[ /tʃes/ ]</span>: cờ vua.<br>• <span class='exp-word'>sports</span> <span class='exp-ipa'>[ /spɔːts/ ]</span>: thể thao nói chung.<br>• <span class='exp-word'>football</span> <span class='exp-ipa'>[ /ˈfʊtbɔːl/ ]</span>: bóng đá.<br>2. Dịch nghĩa toàn câu: 'Chọn từ khác loại: bóng chuyền, cờ vua, thể thao, bóng đá'.<br>3. Tại sao chọn sports? Vì 'sports' là danh từ bao quát chỉ các môn thể thao nói chung, còn lại là tên các trò chơi/môn cụ thể."
+                    },
+                    {
+                        id: "ex3_3",
+                        q: "A. log on | B. log out | C. upload | D. club",
+                        options: ["log on", "log out", "upload", "club"],
+                        answer: "club",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>log on</span> <span class='exp-ipa'>[ /lɒɡ ɒn/ ]</span>: đăng nhập.<br>• <span class='exp-word'>log out</span> <span class='exp-ipa'>[ /lɒɡ aʊt/ ]</span>: đăng xuất.<br>• <span class='exp-word'>upload</span> <span class='exp-ipa'>[ /ˌʌpˈləʊd/ ]</span>: tải lên mạng.<br>• <span class='exp-word'>club</span> <span class='exp-ipa'>[ /klʌb/ ]</span>: câu lạc bộ.<br>2. Dịch nghĩa toàn câu: 'Chọn từ khác loại: đăng nhập, đăng xuất, tải lên, câu lạc bộ'.<br>3. Tại sao chọn club? Vì 'club' là một danh từ chỉ hội, nhóm; trong khi 3 từ còn lại đều là các động từ/cụm động từ liên quan đến hoạt động công nghệ máy tính."
+                    },
+                    {
+                        id: "ex3_4",
+                        q: "A. sports club | B. discuss | C. language club | D. music club",
+                        options: ["sports club", "discuss", "language club", "music club"],
+                        answer: "discuss",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>sports club</span> <span class='exp-ipa'>[ /spɔːts klʌb/ ]</span>: câu lạc bộ thể thao.<br>• <span class='exp-word'>discuss</span> <span class='exp-ipa'>[ /dɪˈskʌs/ ]</span>: thảo luận (động từ).<br>• <span class='exp-word'>language club</span> <span class='exp-ipa'>[ /ˈlæŋɡwɪdʒ klʌb/ ]</span>: câu lạc bộ ngôn ngữ.<br>• <span class='exp-word'>music club</span> <span class='exp-ipa'>[ /ˈmjuːzɪk klʌb/ ]</span>: câu lạc bộ âm nhạc.<br>2. Dịch nghĩa toàn câu: 'Chọn từ khác loại: câu lạc bộ thể thao, thảo luận, câu lạc bộ ngôn ngữ, câu lạc bộ âm nhạc'.<br>3. Tại sao chọn discuss? 'discuss' là động từ hoạt động, còn lại đều là danh từ ghép chỉ các loại hình câu lạc bộ học đường."
+                    },
+                    {
+                        id: "ex3_5",
+                        q: "A. school | B. class | C. library | D. notification",
+                        options: ["school", "class", "library", "notification"],
+                        answer: "notification",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>school</span> <span class='exp-ipa'>[ /skuːl/ ]</span>: trường học.<br>• <span class='exp-word'>class</span> <span class='exp-ipa'>[ /klɑːs/ ]</span>: lớp học.<br>• <span class='exp-word'>library</span> <span class='exp-ipa'>[ /ˈlaɪbrəri/ ]</span>: thư viện.<br>• <span class='exp-word'>notification</span> <span class='exp-ipa'>[ /ˌnəʊtɪfɪˈkeɪʃn/ ]</span>: thông báo.<br>2. Dịch nghĩa toàn câu: 'Chọn từ khác loại: trường học, lớp học, thư viện, thông báo'.<br>3. Tại sao chọn notification? 'notification' thuộc nhóm mạng xã hội/công nghệ thông tin, còn các đáp án còn lại đều là các thực thể thuộc không gian giáo dục học đường."
+                    }
+                ]
+            },
+            "ex4_p1": {
+                title: "Exercise 4 (Part 1: Q1-30): Multiple Choice Questions",
+                desc: "Chọn đáp án đúng nhất để hoàn thành câu (Câu 1 - 30).",
+                questions: [
+                    {
+                        id: "ex4_1",
+                        q: "Students are stressful because they are _______ for the midterm tests.",
+                        options: ["prepare", "preparing", "to preparing", "prepares"],
+                        answer: "preparing",
+                        type: "mcq",
+                        exp: "1. Phân tích ngữ pháp:<br>• <span class='exp-word'>prepare</span> <span class='exp-ipa'>[ /prɪˈpeə(r)/ ]</span>: chuẩn bị (v-nguyên mẫu).<br>• <span class='exp-word'>preparing</span> <span class='exp-ipa'>[ /prɪˈpeərɪŋ/ ]</span>: đang chuẩn bị (v-ing).<br>• <span class='exp-word'>to preparing</span>: cấu trúc sai.<br>• <span class='exp-word'>prepares</span>: chia số ít.<br>2. Dịch nghĩa: 'Học sinh rất căng thẳng bởi vì các bạn ấy đang chuẩn bị cho kì thi giữa kì.'<br>3. Tại sao chọn B? Sử dụng thì hiện tại tiếp diễn với cấu trúc 'are + V-ing'. Chọn 'preparing' là hợp lý nhất."
+                    },
+                    {
+                        id: "ex4_2",
+                        q: "I want to _______ part in the school football club.",
+                        options: ["take", "join", "use", "post"],
+                        answer: "take",
+                        type: "mcq",
+                        exp: "1. Phân tích 4 đáp án:<br>• <span class='exp-word'>take part in</span>: tham gia vào (cụm cố định).<br>• <span class='exp-word'>join</span>: gia nhập (không đi với 'part in').<br>• <span class='exp-word'>use</span>: sử dụng.<br>• <span class='exp-word'>post</span>: đăng bài.<br>2. Dịch nghĩa: 'Tôi muốn tham gia vào câu lạc bộ bóng đá của trường.'<br>3. Tại sao chọn take? Vì cụm 'take part in' đồng nghĩa với 'participate in' hay 'join in' mang nghĩa tham gia."
+                    },
+                    {
+                        id: "ex4_3",
+                        q: "I like studying English _______ Math.",
+                        options: ["for", "or", "and", "on"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "1. Phân tích từ nối:<br>• <span class='exp-word'>and</span>: và (nối hai đối tượng tương đương).<br>• <span class='exp-word'>or</span>: hoặc.<br>• <span class='exp-word'>for</span>: cho / bởi vì.<br>• <span class='exp-word'>on</span>: trên.<br>2. Dịch nghĩa: 'Tôi thích học tiếng Anh và môn Toán.'<br>3. Tại sao chọn and? Diễn tả sự liệt kê hai môn học yêu thích cùng nhau."
+                    },
+                    {
+                        id: "ex4_4",
+                        q: "We use Facebook for our class _______ .",
+                        options: ["account", "forum", "user", "stress"],
+                        answer: "forum",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng:<br>• <span class='exp-word'>forum</span> <span class='exp-ipa'>[ /ˈfɔːrəm/ ]</span>: diễn đàn học tập.<br>• <span class='exp-word'>account</span> <span class='exp-ipa'>[ /əˈkaʊnt/ ]</span>: tài khoản.<br>• <span class='exp-word'>user</span> <span class='exp-ipa'>[ /ˈjuːzə(r)/ ]</span>: người dùng.<br>• <span class='exp-word'>stress</span> <span class='exp-ipa'>[ /stres/ ]</span>: sự áp lực.<br>2. Dịch nghĩa: 'Chúng tôi sử dụng mạng xã hội Facebook làm diễn đàn giao lưu cho lớp học của mình.'<br>3. Tại sao chọn forum? 'class forum' là diễn đàn trực tuyến của lớp giúp thảo luận bài học tiện lợi."
+                    },
+                    {
+                        id: "ex4_5",
+                        q: "Teenagers often have pressure _______ their parents and friends.",
+                        options: ["about", "in", "at", "from"],
+                        answer: "from",
+                        type: "mcq",
+                        exp: "1. Phân tích giới từ:<br>• <span class='exp-word'>pressure from</span>: áp lực đến từ ai đó.<br>2. Dịch nghĩa: 'Thanh thiếu niên thường phải chịu nhiều áp lực từ bố mẹ và bạn bè của họ.'<br>3. Tại sao chọn from? Giới từ 'from' chỉ nguồn gốc phát sinh của sự áp lực."
+                    },
+                    {
+                        id: "ex4_6",
+                        q: "After school, we sometimes post a few questions on the _______ for discussion.",
+                        options: ["bully", "forum", "competition", "notification"],
+                        answer: "forum",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng:<br>• <span class='exp-word'>forum</span>: diễn đàn trực tuyến.<br>• <span class='exp-word'>bully</span>: kẻ bắt nạt học đường.<br>• <span class='exp-word'>competition</span>: cuộc thi tranh tài.<br>• <span class='exp-word'>notification</span>: thông báo.<br>2. Dịch nghĩa: 'Sau giờ học, thỉnh thoảng chúng tôi đăng một vài câu hỏi lên diễn đàn lớp học để cùng thảo luận.'<br>3. Tại sao chọn forum? Vì diễn đàn trực tuyến là nơi thích hợp đăng câu hỏi thảo luận ('for discussion')."
+                    },
+                    {
+                        id: "ex4_7",
+                        q: "I take pride in my positive attitude. I always stay _______, even in the worst situations.",
+                        options: ["enjoyable", "peaceful", "calm", "user-friendly"],
+                        answer: "calm",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng:<br>• <span class='exp-word'>calm</span> <span class='exp-ipa'>[ /kɑːm/ ]</span>: bình tĩnh, điềm đạm.<br>• <span class='exp-word'>enjoyable</span> <span class='exp-ipa'>[ /ɪnˈdʒɔɪəbl/ ]</span>: thú vị.<br>• <span class='exp-word'>peaceful</span> <span class='exp-ipa'>[ /ˈpiːsfl/ ]</span>: yên bình.<br>• <span class='exp-word'>user-friendly</span>: dễ sử dụng.<br>2. Dịch nghĩa: 'Tôi tự hào về thái độ tích cực của mình. Tôi luôn luôn giữ bình tĩnh, ngay cả trong những tình huống tệ nhất.'<br>3. Tại sao chọn calm? Vì cụm 'stay calm' mang nghĩa giữ thái độ bình thản, kiểm soát cảm xúc."
+                    },
+                    {
+                        id: "ex4_8",
+                        q: "We feel pressured because there are only two days left until our _______ exam.",
+                        options: ["economic", "midterm", "social", "bad"],
+                        answer: "midterm",
+                        type: "mcq",
+                        exp: "1. Phân tích ngữ cảnh:<br>• <span class='exp-word'>midterm exam</span>: kỳ thi giữa học kỳ.<br>• <span class='exp-word'>economic</span>: thuộc về kinh tế.<br>• <span class='exp-word'>social</span>: thuộc xã hội.<br>2. Dịch nghĩa: 'Chúng tôi thấy vô cùng áp lực vì chỉ còn lại đúng hai ngày nữa là đến kì thi giữa kì.'<br>3. Tại sao chọn midterm? 'midterm exam' rất phù hợp với bối cảnh học sinh chịu áp lực ôn tập."
+                    },
+                    {
+                        id: "ex4_9",
+                        q: "Friendship is expressed through _______, caring, and helping each other when facing difficulties.",
+                        options: ["sharing", "doing", "making", "discussing"],
+                        answer: "sharing",
+                        type: "mcq",
+                        exp: "1. Phân tích ngữ cảnh tình bạn:<br>• <span class='exp-word'>sharing</span> <span class='exp-ipa'>[ /ˈʃeərɪŋ/ ]</span>: sự chia sẻ buồn vui.<br>• <span class='exp-word'>doing</span>: việc làm.<br>• <span class='exp-word'>making</span>: chế tạo.<br>• <span class='exp-word'>discussing</span>: thảo luận.<br>2. Dịch nghĩa: 'Tình bạn tốt đẹp được thể hiện qua sự sẻ chia, quan tâm và giúp đỡ lẫn nhau khi gặp khó khăn.'<br>3. Tại sao chọn sharing? Đi cùng 'caring' và 'helping' tạo thành bộ ba đức tính cốt lõi của tình bạn."
+                    },
+                    {
+                        id: "ex4_10",
+                        q: "She wants to _______ the club to connect with new friends.",
+                        options: ["cook", "browse", "join", "log"],
+                        answer: "join",
+                        type: "mcq",
+                        exp: "1. Phân tích động từ đi với 'club':<br>• <span class='exp-word'>join the club</span>: gia nhập câu lạc bộ.<br>• <span class='exp-word'>cook</span>: nấu nướng.<br>• <span class='exp-word'>browse</span>: lướt web.<br>• <span class='exp-word'>log</span>: đăng nhập.<br>2. Dịch nghĩa: 'Cô ấy muốn tham gia câu lạc bộ để kết nối và làm quen với nhiều người bạn mới.'<br>3. Tại sao chọn join? Vì 'join' trực tiếp đi kèm tân ngữ chỉ một tổ chức/câu lạc bộ để tham gia."
+                    },
+                    {
+                        id: "ex4_11",
+                        q: "Friendship is important to us, _______ it makes us happy and encourages us to go ahead all the time.",
+                        options: ["or", "so", "but", "for"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "1. Phân tích liên từ:<br>• <span class='exp-word'>for</span>: bởi vì (đứng giữa câu, sau dấu phẩy).<br>• <span class='exp-word'>so</span>: vì vậy.<br>• <span class='exp-word'>but</span>: nhưng.<br>• <span class='exp-word'>or</span>: hoặc.<br>2. Dịch nghĩa: 'Tình bạn đóng vai trò rất quan trọng đối với chúng ta, vì nó giúp ta hạnh phúc và tiếp thêm động lực tiến lên.'<br>3. Tại sao chọn for? Ở đây, 'for' hoạt động như liên từ đẳng lập chỉ nguyên nhân (bằng với 'because')."
+                    },
+                    {
+                        id: "ex4_12",
+                        q: "Through social media, your child could develop his social skills; _______, he may spend too much time online and be disconnected from the real world.",
+                        options: ["therefore", "however", "so", "and"],
+                        answer: "however",
+                        type: "mcq",
+                        exp: "1. Phân tích nghĩa vế câu:<br>Vế 1 là mặt tốt (phát triển kỹ năng), vế 2 là mặt hại (dành quá nhiều thời gian online). Hai vế đối lập nhau.<br>• <span class='exp-word'>however</span> <span class='exp-ipa'>[ /haʊˈevə(r)/ ]</span>: tuy nhiên.<br>• <span class='exp-word'>therefore</span>: vì thế.<br>2. Dịch nghĩa: 'Thông qua mạng xã hội, trẻ nhỏ có thể phát triển kỹ năng; tuy nhiên, các em lại dễ sa đà dành quá nhiều thời gian online.'<br>3. Tại sao chọn however? Dùng để diễn tả sự nhượng bộ, trái ngược giữa mặt lợi và hại."
+                    },
+                    {
+                        id: "ex4_13",
+                        q: "Mai wants to be a model in the future, _______ she always tries to eat healthily and take plenty of exercise.",
+                        options: ["or", "but", "so", "and"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ nhân quả:<br>Nguyên nhân: muốn làm người mẫu. Kết quả: ăn uống lành mạnh và tập thể thao.<br>• <span class='exp-word'>so</span>: cho nên (chỉ kết quả).<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Mai muốn trở thành một người mẫu trong tương lai, vì vậy cô ấy luôn cố gắng ăn uống lành mạnh và tập thể dục nhiều.'<br>3. Tại sao chọn so? Biểu thị mệnh đề chỉ kết quả của ước mơ làm mẫu."
+                    },
+                    {
+                        id: "ex4_14",
+                        q: "Some students say TikTok distracts them from schoolwork, _______ it also makes them lose focus.",
+                        options: ["but", "and", "so", "or"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "1. Phân tích mối liên hệ song hành bổ sung:<br>TikTok gây xao lãng (distracts) VÀ làm mất tập trung (lose focus).<br>• <span class='exp-word'>and</span>: và (bổ sung thông tin cùng chiều tiêu cực).<br>2. Dịch nghĩa: 'Nhiều học sinh nói TikTok làm họ xao lãng việc học ở trường, và nó cũng khiến họ bị mất tập trung.'<br>3. Tại sao chọn and? 'And' nối kết 2 tác hại song song của TikTok."
+                    },
+                    {
+                        id: "ex4_15",
+                        q: "You shouldn’t compare yourself to others, _______, you may feel disappointed and less confident.",
+                        options: ["therefore", "otherwise", "so", "and"],
+                        answer: "otherwise",
+                        type: "mcq",
+                        exp: "1. Phân tích liên từ:<br>• <span class='exp-word'>otherwise</span> <span class='exp-ipa'>[ /ˈʌðəwaɪz/ ]</span>: nếu không thì (dùng sau dấu phẩy).<br>• <span class='exp-word'>therefore</span>: vì vậy.<br>2. Dịch nghĩa: 'Con không nên tự so sánh bản thân với người khác, nếu không thì, con sẽ thấy thất vọng và kém tự tin đi đó.'<br>3. Tại sao chọn otherwise? 'otherwise' đưa ra một giả định hậu quả tiêu cực nếu hành động khuyên răn không được thực hiện."
+                    },
+                    {
+                        id: "ex4_16",
+                        q: "He reads a lot of books, _______ he is smart.",
+                        options: ["but", "so", "and", "or"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ nhân quả:<br>Nguyên nhân: Đọc rất nhiều sách. Kết quả: Cậu ấy thông minh.<br>• <span class='exp-word'>so</span>: vì vậy, cho nên.<br>2. Dịch nghĩa: 'Cậu ấy đọc rất nhiều sách, vì thế cậu ấy rất thông minh.'<br>3. Tại sao chọn so? Biểu thị sự đúc kết kết quả hợp lý của việc đọc nhiều."
+                    },
+                    {
+                        id: "ex4_17",
+                        q: "Linda got up late in the morning; _______, she was late for school.",
+                        options: ["therefore", "otherwise", "however", "and"],
+                        answer: "therefore",
+                        type: "mcq",
+                        exp: "1. Phân tích ngữ pháp dấu câu:<br>Dấu chấm phẩy ';' và dấu phẩy ',' bao quanh vị trí trống chỉ trạng từ nối chỉ kết quả nhân quả.<br>• <span class='exp-word'>therefore</span> <span class='exp-ipa'>[ /ˈðeəfɔː(r)/ ]</span>: do đó, vì vậy.<br>• <span class='exp-word'>however</span>: tuy nhiên.<br>2. Dịch nghĩa: 'Linda ngủ dậy trễ vào buổi sáng; do đó, bạn ấy đã bị trễ học.'<br>3. Tại sao chọn therefore? Vì diễn đạt mối quan hệ nhân quả tuyệt đối giữa ngủ trễ và đi học muộn."
+                    },
+                    {
+                        id: "ex4_18",
+                        q: "They want to go camping, _______ they have no time.",
+                        options: ["for", "and", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ tương phản:<br>Muốn đi cắm trại >< Không có thời gian rảnh.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Họ rất muốn đi cắm trại dã ngoại, nhưng họ lại không có thời gian.'<br>3. Tại sao chọn but? 'But' biểu thị sự tương phản sâu sắc giữa mong muốn và thực tế."
+                    },
+                    {
+                        id: "ex4_19",
+                        q: "My sister bought a guitar, _______ she likes playing the guitar.",
+                        options: ["so", "but", "for", "therefore"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "1. Phân tích mệnh đề nguyên nhân:<br>Tại sao chị tôi mua guitar? Vì chị ấy thích chơi đàn.<br>• <span class='exp-word'>for</span>: vì (bằng because).<br>2. Dịch nghĩa: 'Chị gái tôi đã mua một cây đàn guitar, vì chị ấy rất thích chơi nhạc cụ này.'<br>3. Tại sao chọn for? 'for' giải thích lý do mua hàng ở vế trước."
+                    },
+                    {
+                        id: "ex4_20",
+                        q: "Students _______ to get more information about this topic.",
+                        options: ["want", "wants", "are wanting", "to want"],
+                        answer: "want",
+                        type: "mcq",
+                        exp: "1. Phân tích chia động từ:<br>• Chủ ngữ 'Students' là danh từ số nhiều -> Động từ giữ nguyên mẫu 'want'.<br>• Động từ chỉ trạng thái ý muốn 'want' thường không chia ở thì tiếp diễn 'are wanting'.<br>2. Dịch nghĩa: 'Các học sinh muốn tìm hiểu thêm thông tin về chủ đề thảo luận này.'<br>3. Tại sao chọn want? Phù hợp chủ ngữ số nhiều ở hiện tại đơn."
+                    },
+                    {
+                        id: "ex4_21",
+                        q: "Our school has created an online __________ for us so we can share our thoughts and problems.",
+                        options: ["forum", "space", "class", "platform"],
+                        answer: "forum",
+                        type: "mcq",
+                        exp: "1. Phân tích danh từ ghép:<br>• <span class='exp-word'>online forum</span>: diễn đàn trực tuyến học đường.<br>2. Dịch nghĩa: 'Trường học của chúng tôi đã thành lập một diễn đàn trực tuyến cho chúng tôi để chia sẻ suy nghĩ và khó khăn.'<br>3. Tại sao chọn forum? Vì diễn đàn trực tuyến hỗ trợ việc thảo luận công khai bài học tốt nhất."
+                    },
+                    {
+                        id: "ex4_22",
+                        q: "They often make video calls to keep in __________ with their friends.",
+                        options: ["sight", "view", "touch", "shape"],
+                        answer: "touch",
+                        type: "mcq",
+                        exp: "1. Phân tích cụm từ cố định (idiom/collocation):<br>• <span class='exp-word'>keep in touch with</span>: giữ liên lạc với ai đó.<br>• <span class='exp-word'>keep in shape</span>: giữ vóc dáng cân đối.<br>2. Dịch nghĩa: 'Họ thường xuyên gọi điện video để duy trì liên lạc thân mật với bạn bè của mình.'<br>3. Tại sao chọn touch? Ghép lại thành cụm 'keep in touch' vô cùng thông dụng."
+                    },
+                    {
+                        id: "ex4_23",
+                        q: "There are several strategies that can help teenagers handle negative peers __________.",
+                        options: ["influence", "stress", "impact", "pressure"],
+                        answer: "pressure",
+                        type: "mcq",
+                        exp: "1. Phân tích cụm danh từ ghép:<br>• <span class='exp-word'>peer pressure</span>: áp lực đồng trang lứa (cụm thuật ngữ tâm lý học học đường cực kỳ phổ biến).<br>2. Dịch nghĩa: 'Có một vài phương pháp hữu ích giúp trẻ vị thành niên giải tỏa áp lực từ bạn bè đồng lứa.'<br>3. Tại sao chọn pressure? Kết hợp với 'peer' tạo thành 'peer pressure'."
+                    },
+                    {
+                        id: "ex4_24",
+                        q: "The school is trying to make the library more __________.",
+                        options: ["stressful", "user-friendly", "time-consuming", "hospitable"],
+                        answer: "user-friendly",
+                        type: "mcq",
+                        exp: "1. Phân tích tính từ bổ trợ:<br>• <span class='exp-word'>user-friendly</span> <span class='exp-ipa'>[ /ˌjuːzə ˈfrendli/ ]</span>: thân thiện với người dùng, dễ khai thác sử dụng.<br>• <span class='exp-word'>time-consuming</span>: tốn thời gian.<br>• <span class='exp-word'>stressful</span>: gây căng thẳng.<br>2. Dịch nghĩa: 'Trường học đang cố gắng cải tiến thư viện trở nên dễ dàng và thân thiện hơn cho học sinh tra cứu.'<br>3. Tại sao chọn user-friendly? Thư viện cần có thiết kế khoa học, bố trí dễ tìm sách để đạt tiêu chí này."
+                    },
+                    {
+                        id: "ex4_25",
+                        q: "You should turn off the __________ on your phone to avoid being disturbed.",
+                        options: ["notice", "notifications", "information", "power"],
+                        answer: "notifications",
+                        type: "mcq",
+                        exp: "1. Phân tích danh từ mạng xã hội:<br>• <span class='exp-word'>notifications</span> <span class='exp-ipa'>[ /ˌnəʊtɪfɪˈkeɪʃnz/ ]</span>: các thông báo điện thoại.<br>• <span class='exp-word'>notice</span>: thông báo bằng giấy ở bảng tin.<br>2. Dịch nghĩa: 'Con nên tắt tính năng hiển thị thông báo trên điện thoại để tránh bị làm phiền khi học bài.'<br>3. Tại sao chọn notifications? Từ vựng chỉ thông báo ứng dụng trên thiết bị di động thông minh."
+                    },
+                    {
+                        id: "ex4_26",
+                        q: "Mary wants to go abroad, _______ she saves money from now.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích nhân quả:<br>Ước mơ: Đi du học (go abroad) -> Hành động kết quả: Tiết kiệm tiền (saves money).<br>• <span class='exp-word'>so</span>: vì vậy.<br>2. Dịch nghĩa: 'Mary muốn đi du học nước ngoài, vì thế bạn ấy bắt đầu tiết kiệm tiền từ bây giờ.'<br>3. Tại sao chọn so? Liên kết mệnh đề nguyên nhân và mệnh đề kết quả hợp logic thực tế."
+                    },
+                    {
+                        id: "ex4_27",
+                        q: "They used to be friends, _______ now they are not.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ đối lập thời gian:<br>Quá khứ: Đã từng là bạn (used to be friends) >< Hiện tại: Bây giờ không còn nữa.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Họ từng là những người bạn rất thân của nhau, nhưng bây giờ thì không còn nữa rồi.'<br>3. Tại sao chọn but? Thể hiện rõ nét sự đối lập hoàn toàn giữa quá khứ và hiện tại."
+                    },
+                    {
+                        id: "ex4_28",
+                        q: "Ann is very sensitive; _______, you shouldn’t comment on his new shoes.",
+                        options: ["but", "therefore", "however", "so"],
+                        answer: "therefore",
+                        type: "mcq",
+                        exp: "1. Phân tích ngữ pháp dấu câu '; ... ,':<br>Cần trạng từ liên kết đứng sau ';' và trước ','.<br>• <span class='exp-word'>therefore</span>: vì vậy, do đó.<br>• <span class='exp-word'>however</span>: tuy nhiên.<br>2. Dịch nghĩa: 'Ann rất nhạy cảm và dễ xúc động; do đó, bạn không nên bình phẩm chê bai đôi giày mới của cậu ấy.'<br>3. Tại sao chọn therefore? Vì đây là hành vi khuyên bảo rút ra từ tính cách nhạy cảm của Ann."
+                    },
+                    {
+                        id: "ex4_29",
+                        q: "This event is held to commemorate the national heroes, _______ it teaches children to respect and be grateful to the heroes.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ đồng đẳng bổ sung thông tin tích cực:<br>Ý nghĩa 1: Tưởng niệm anh hùng (commemorate). Ý nghĩa 2: Giáo dục trẻ nhỏ lòng biết ơn.<br>• <span class='exp-word'>and</span>: và (nối kết 2 lợi ích tuyệt vời của lễ hội).<br>2. Dịch nghĩa: 'Sự kiện này được tổ chức để tưởng nhớ các vị anh hùng dân tộc, và nó cũng giáo dục các con biết kính trọng, biết ơn thế hệ đi trước.'<br>3. Tại sao chọn and? Kết nối song hành hai mục tiêu giáo dục cao đẹp."
+                    },
+                    {
+                        id: "ex4_30",
+                        q: "You can take a seat, _______ you can go around and take a look. It’s up to you.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "or",
+                        type: "mcq",
+                        exp: "1. Phân tích sự lựa chọn:<br>Hành động 1: Ngồi xuống. Hành động 2: Đi dạo xung quanh ngắm nhìn. Có cụm 'It's up to you' (Tùy thuộc ở bạn).<br>• <span class='exp-word'>or</span>: hoặc (lựa chọn 1 trong 2 hành động tự do).<br>2. Dịch nghĩa: 'Bạn có thể ngồi nghỉ chân, hoặc bạn có thể đi xung quanh tham quan. Tùy bạn quyết định nha!'<br>3. Tại sao chọn or? Biểu đạt sự lựa chọn luân phiên."
+                    }
+                ]
+            },
+            "ex4_p2": {
+                title: "Exercise 4 (Part 2: Q31-65): Multiple Choice Questions",
+                desc: "Chọn đáp án đúng nhất để hoàn thành câu (Câu 31 - 65).",
+                questions: [
+                    {
+                        id: "ex4_31",
+                        q: "Could you _______ me more about the English club?",
+                        options: ["tells", "tell", "to tell", "told"],
+                        answer: "tell",
+                        type: "mcq",
+                        exp: "1. Phân tích cấu trúc câu hỏi lịch sự:<br>• Cấu trúc 'Could you + V-nguyên mẫu' dùng đề nghị ai giúp đỡ lịch sự.<br>2. Dịch nghĩa: 'Bạn có thể vui lòng kể thêm cho tôi nghe về câu lạc bộ tiếng Anh không?'<br>3. Tại sao chọn B? Sử dụng dạng động từ nguyên mẫu không chia 'tell'."
+                    },
+                    {
+                        id: "ex4_32",
+                        q: "Facebook is used _______ with friends all over the world.",
+                        options: ["connect", "to connect", "connecting", "connects"],
+                        answer: "to connect",
+                        type: "mcq",
+                        exp: "1. Phân tích cấu trúc chỉ mục đích passive:<br>• Cấu trúc 'S + is used + to V-inf': cái gì đó được dùng để làm việc gì.<br>2. Dịch nghĩa: 'Mạng xã hội Facebook được sử dụng nhằm mục đích kết nối bạn bè khắp thế giới.'<br>3. Tại sao chọn to connect? Biểu thị rõ ràng mục đích sử dụng."
+                    },
+                    {
+                        id: "ex4_33",
+                        q: "The Maths club starts at 6 p.m _______ Mondays and Fridays.",
+                        options: ["in", "at", "on", "for"],
+                        answer: "on",
+                        type: "mcq",
+                        exp: "1. Phân tích giới từ thời gian:<br>• Ta dùng giới từ <span class='exp-word'>on</span> trước các ngày trong tuần (Mondays, Fridays).<br>2. Dịch nghĩa: 'Câu lạc bộ Toán học bắt đầu sinh hoạt vào lúc 6 giờ tối các ngày thứ Hai và thứ Sáu hàng tuần.'<br>3. Tại sao chọn on? Quy tắc ngữ pháp bất biến: on + ngày trong tuần."
+                    },
+                    {
+                        id: "ex4_34",
+                        q: "Let's _______ the chess club, for it is interesting.",
+                        options: ["join", "take part", "take", "join in"],
+                        answer: "join",
+                        type: "mcq",
+                        exp: "1. Phân tích động từ:<br>• <span class='exp-word'>join + N (club)</span>: gia nhập câu lạc bộ trực tiếp mà không cần giới từ.<br>• <span class='exp-word'>take part in</span>: thiếu giới từ 'in'.<br>2. Dịch nghĩa: 'Chúng mình cùng gia nhập câu lạc bộ cờ vua đi, vì nó thực sự rất thú vị đó.'<br>3. Tại sao chọn join? Động từ 'join' có thể kết nối trực tiếp với danh từ câu lạc bộ đứng sau."
+                    },
+                    {
+                        id: "ex4_35",
+                        q: "You can improve _______ skills from this club.",
+                        options: ["practice", "practical", "to practice", "practicing"],
+                        answer: "practical",
+                        type: "mcq",
+                        exp: "1. Phân tích từ loại trước danh từ:<br>• Đứng trước bổ nghĩa cho danh từ 'skills' cần một tính từ.<br>• <span class='exp-word'>practical</span> <span class='exp-ipa'>[ /ˈpræktɪkl/ ]</span>: thực tế, mang tính thực hành cao (tính từ).<br>• <span class='exp-word'>practice</span>: danh từ / động từ luyện tập.<br>2. Dịch nghĩa: 'Con có thể rèn luyện và nâng cao nhiều kỹ năng thực tế cuộc sống từ câu lạc bộ học đường này.'<br>3. Tại sao chọn practical? Vì cụm 'practical skills' nghĩa là các kỹ năng thực tiễn vô cùng hữu ích."
+                    },
+                    {
+                        id: "ex4_36",
+                        q: "We _______ the school website to find the school activities.",
+                        options: ["focus", "thank", "deny", "browse"],
+                        answer: "browse",
+                        type: "mcq",
+                        exp: "1. Phân tích động từ hoạt động mạng:<br>• <span class='exp-word'>browse</span> <span class='exp-ipa'>[ /braʊz/ ]</span>: lướt qua, duyệt xem tin tức trang web.<br>• <span class='exp-word'>focus on</span>: tập trung (cần giới từ on).<br>2. Dịch nghĩa: 'Chúng tôi thường lướt trang web trường học để cập nhật tìm kiếm các hoạt động ngoại khóa sắp tới.'<br>3. Tại sao chọn browse? Động từ chuẩn xác cho hành vi đọc thông tin trên website."
+                    },
+                    {
+                        id: "ex4_37",
+                        q: "I log _______ to my Facebook account to post my photos and chat with everyone.",
+                        options: ["on", "about", "with", "at"],
+                        answer: "on",
+                        type: "mcq",
+                        exp: "1. Phân tích phrasal verb:<br>• <span class='exp-word'>log on/in to</span>: đăng nhập vào hệ thống mạng xã hội.<br>2. Dịch nghĩa: 'Tôi đăng nhập vào tài khoản Facebook cá nhân để đăng tải hình ảnh kỷ niệm và trò chuyện với mọi người.'<br>3. Tại sao chọn on? Cấu trúc log on to an account."
+                    },
+                    {
+                        id: "ex4_38",
+                        q: "My father is an engineer, _______ he often has to work away from home.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích nhân quả:<br>Nghề nghiệp: Kỹ sư công trình -> Hệ quả: Phải đi làm xa nhà liên tục.<br>• <span class='exp-word'>so</span>: cho nên.<br>2. Dịch nghĩa: 'Bố của tôi là một kỹ sư, vì vậy bố thường xuyên phải đi làm việc xa nhà.'<br>3. Tại sao chọn so? Diễn đạt kết quả tất yếu của đặc thù ngành kỹ sư."
+                    },
+                    {
+                        id: "ex4_39",
+                        q: "This year the Mid-Autumn Festival falls on the next Sunday, _______ I can go home and reunite with my family.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ nhân quả:<br>Trung thu rơi vào Chủ nhật tới -> Tôi được về đoàn tụ gia đình.<br>• <span class='exp-word'>so</span>: cho nên.<br>2. Dịch nghĩa: 'Năm nay tết Trung Thu rơi vào đúng ngày Chủ Nhật tới, vì thế tôi có thể về quê đoàn viên cùng gia đình thân yêu.'<br>3. Tại sao chọn so? Nối kết nguyên nhân kỳ nghỉ phép và kết quả hạnh phúc bên người thân."
+                    },
+                    {
+                        id: "ex4_40",
+                        q: "Would you like to drink milk tea_______ coffee?",
+                        options: ["or", "otherwise", "so", "therefore"],
+                        answer: "or",
+                        type: "mcq",
+                        exp: "1. Phân tích từ lựa chọn câu hỏi:<br>• <span class='exp-word'>or</span>: hay là, hoặc là (đưa ra sự tuyển lựa đồ uống).<br>2. Dịch nghĩa: 'Em muốn uống trà sữa hay là cà phê nào?'<br>3. Tại sao chọn or? Dùng cấu trúc 'A or B' trong câu mời mọc, hỏi sở thích cá nhân."
+                    },
+                    {
+                        id: "ex4_41",
+                        q: "I have never joined a carnival, _______ I am very curious about it.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ tương phản:<br>Vế 1: Chưa bao giờ tham gia lễ hội đường phố (tiêu cực) >< Vế 2: Rất tò mò háo hức muốn thử (tích cực).<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Tôi chưa từng được tham gia một lễ hội hóa trang đường phố nào, nhưng tôi lại vô cùng tò mò về nó.'<br>3. Tại sao chọn but? Thể hiện sự tò mò trái ngược với rào cản kinh nghiệm cá nhân."
+                    },
+                    {
+                        id: "ex4_42",
+                        q: "My mother is occupied with her job, _______ she tries to make time for me.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ đối lập nghịch lý:<br>Mẹ bận rộn ngập đầu công việc >< Cố gắng thu xếp thời gian cho con cái.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Mẹ của tôi vô cùng bận rộn với công việc cơ quan, nhưng mẹ vẫn luôn nỗ lực dành nhiều thời gian chăm sóc tôi.'<br>3. Tại sao chọn but? Ca ngợi tình yêu của mẹ vượt qua mọi bận rộn."
+                    },
+                    {
+                        id: "ex4_43",
+                        q: "I am learning English _______ I want to get a good job after school.",
+                        options: ["but", "because", "so", "therefore"],
+                        answer: "because",
+                        type: "mcq",
+                        exp: "1. Phân tích mệnh đề lý do:<br>Tại sao học tiếng Anh? Vì tôi muốn có việc tốt.<br>• <span class='exp-word'>because</span>: bởi vì (nối nguyên nhân kết quả xuôi dòng).<br>2. Dịch nghĩa: 'Tôi quyết tâm học giỏi tiếng Anh bởi vì tôi ước mơ tìm được một công việc thật tốt sau khi tốt nghiệp.'<br>3. Tại sao chọn B? Phù hợp liên kết mệnh đề phụ chỉ nguyên nhân."
+                    },
+                    {
+                        id: "ex4_44",
+                        q: "Do you want to join us _______ do you want to leave now?",
+                        options: ["and", "or", "but", "so"],
+                        answer: "or",
+                        type: "mcq",
+                        exp: "1. Phân tích sự lựa chọn hành động:<br>Hành động 1: Đi cùng chúng tôi >< Hành động 2: Rời đi ngay bây giờ.<br>• <span class='exp-word'>or</span>: hay là.<br>2. Dịch nghĩa: 'Cậu muốn tham gia vui chơi cùng tụi mình hay là muốn đi về ngay bây giờ nào?'<br>3. Tại sao chọn or? Diễn đạt hai sự chọn lựa đối lập nhau trong câu hỏi lựa chọn."
+                    },
+                    {
+                        id: "ex4_45",
+                        q: "I love cats, _______ my mother doesn’t allow me to have one.",
+                        options: ["and", "or", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích đối lập mong muốn thực tế:<br>Thích nuôi mèo >< Mẹ không cho phép nuôi.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Tôi rất yêu loài mèo, nhưng mẹ tôi tuyệt đối không đồng ý cho tôi nuôi một bé trong nhà.'<br>3. Tại sao chọn but? 'But' nối kết rào cản ngăn cản ước muốn nuôi thú cưng."
+                    },
+                    {
+                        id: "ex4_46",
+                        q: "Look at the old man over there. He is old, _______ he is strong and helpful.",
+                        options: ["and", "but", "so", "therefore"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích đối lập tuổi tác sức khỏe:<br>Tuổi già >< Khỏe mạnh hoạt bát giúp đỡ mọi người.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Hãy nhìn cụ ông ở đằng kia kìa. Ông cụ tuy đã cao tuổi, nhưng vẫn cực kỳ khỏe mạnh và hay giúp đỡ hàng xóm.'<br>3. Tại sao chọn but? Phá bỏ định kiến người già yếu đuối bằng từ 'but'."
+                    },
+                    {
+                        id: "ex4_47",
+                        q: "She doesn't like cooking _______ cleaning the house. She spends a lot of time working.",
+                        options: ["for", "so", "and", "but"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "1. Phân tích liên từ phủ định kép:<br>Không thích làm việc 1 (nấu ăn) và không thích làm việc 2 (lau nhà).<br>• <span class='exp-word'>and</span>: và.<br>2. Dịch nghĩa: 'Cô ấy không thích nấu ăn và cũng không thích dọn dẹp nhà cửa. Cô ấy dành hầu hết thời gian cho công việc văn phòng.'<br>3. Tại sao chọn and? 'and' kết nối song hành hai sở ghét của chủ ngữ."
+                    },
+                    {
+                        id: "ex4_48",
+                        q: "We have a day off today, _______ we will go to the cinema and go shopping.",
+                        options: ["but", "for", "so", "and"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích nhân quả:<br>Nguyên nhân: Hôm nay được nghỉ làm/học -> Kết quả: Sẽ đi xem phim mua sắm thả ga.<br>• <span class='exp-word'>so</span>: vì thế.<br>2. Dịch nghĩa: 'Hôm nay chúng tôi được nghỉ phép, vì vậy cả nhóm quyết định đi xem phim rạp và mua sắm.'<br>3. Tại sao chọn so? Nối kết kế hoạch vui chơi nảy sinh từ kỳ nghỉ."
+                    },
+                    {
+                        id: "ex4_49",
+                        q: "I waited for her for a long time at the cafe, _______ she didn't come.",
+                        options: ["but", "so", "for", "therefore"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ đối lập:<br>Hành động: Đã đợi rất lâu >< Kết quả thực tế: Cô ấy không tới hẹn.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Tôi đã kiên nhẫn ngồi đợi cô ấy rất lâu ở quán cà phê, nhưng cuối cùng cô ấy đã không xuất hiện.'<br>3. Tại sao chọn but? Diễn đạt nỗi thất vọng tương phản với công sức chờ đợi."
+                    },
+                    {
+                        id: "ex4_50",
+                        q: "It is getting dark, _______ I am so hungry.",
+                        options: ["or", "but", "so", "and"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "1. Phân tích quan hệ song song cộng dồn thực tế:<br>Sự việc 1: Trời đang tối dần. Sự việc 2: Tôi đang đói bụng cồn cào.<br>• <span class='exp-word'>and</span>: và (hoặc so biểu thị nhân quả nhẹ, nhưng 'and' kết hợp trạng thái tự nhiên bổ trợ thích hợp nhất).<br>2. Dịch nghĩa: 'Trời bắt đầu tối dần, và tôi cũng thấy đói bụng lắm rồi.'<br>3. Tại sao chọn and? Nối liền hai trạng thái cùng xuất hiện ở thời điểm hoàng hôn."
+                    },
+                    {
+                        id: "ex4_51",
+                        q: "The boy felt annoyed because he couldn’t log _______ to his Twitter account.",
+                        options: ["in", "on", "off", "out"],
+                        answer: "in",
+                        type: "mcq",
+                        exp: "1. Phân tích phrasal verb kết nối:<br>• <span class='exp-word'>log in to</span>: đăng nhập tài khoản trực tuyến máy tính.<br>2. Dịch nghĩa: 'Cậu bé thấy bực bội khó chịu vì không thể nào đăng nhập vào tài khoản Twitter của mình.'<br>3. Tại sao chọn in? Đăng nhập là cụm 'log in to' hoặc 'log on to'. Trong 4 đáp án thì 'in' là giới từ khớp ngữ pháp."
+                    },
+                    {
+                        id: "ex4_52",
+                        q: "Which _______ do you usually browse, Phuong? Facebook, of course.",
+                        options: ["club", "account", "website", "notification"],
+                        answer: "website",
+                        type: "mcq",
+                        exp: "1. Phân tích danh từ đi cùng 'browse':<br>• <span class='exp-word'>browse website</span>: lướt xem trang mạng điện tử.<br>2. Dịch nghĩa: 'Phương ơi, cậu thường lướt xem trang web nào vậy? - Tớ lướt Facebook để giữ liên lạc với bạn bè.'<br>3. Tại sao chọn website? Vì trang web hay nền tảng mạng xã hội lớn hoạt động dưới dạng website khổng lồ."
+                    },
+                    {
+                        id: "ex4_53",
+                        q: "His grades at school don’t usually meet his parents’ ________.",
+                        options: ["pressure", "expectations", "stress", "media"],
+                        answer: "expectations",
+                        type: "mcq",
+                        exp: "1. Phân tích collocation:<br>• <span class='exp-word'>meet one's expectations</span>: đáp ứng kỳ vọng mong mỏi của ai đó.<br>2. Dịch nghĩa: 'Điểm số của cậu ấy trên lớp thường không đạt được kỳ vọng mong đợi từ bố mẹ.'<br>3. Tại sao chọn B? Cụm từ cố định chỉ việc thỏa mãn niềm mong mỏi của người lớn."
+                    },
+                    {
+                        id: "ex4_54",
+                        q: "We’re going to have the _______ test. I think I should concentrate more on my studies.",
+                        options: ["final", "midterm", "yearly", "daily"],
+                        answer: "midterm",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng học đường:<br>• <span class='exp-word'>midterm test</span>: bài kiểm tra định kỳ giữa học kỳ.<br>2. Dịch nghĩa: 'Chúng tôi chuẩn bị bước vào kỳ kiểm tra giữa kỳ. Tớ nghĩ mình phải tập trung cao độ học tập thôi.'<br>3. Tại sao chọn midterm? 'midterm test' liên kết với hành vi khẩn trương ôn bài ở vế sau."
+                    },
+                    {
+                        id: "ex4_55",
+                        q: "Nam has just shown me how to _______ my homework on Google classroom.",
+                        options: ["download", "check", "post", "upload"],
+                        answer: "upload",
+                        type: "mcq",
+                        exp: "1. Phân tích hành vi tin học:<br>• <span class='exp-word'>upload homework</span>: nộp bài, tải bài tập từ máy lên lớp học trực tuyến.<br>2. Dịch nghĩa: 'Nam vừa mới hướng dẫn tớ cách tải bài tập về nhà lên ứng dụng Google Classroom trực tuyến đó.'<br>3. Tại sao chọn upload? Vì nộp bài lên hệ thống cần thao tác truyền tệp tin lên máy chủ."
+                    },
+                    {
+                        id: "ex4_56",
+                        q: "Nam didn’t study hard, __________ he failed the exam.",
+                        options: ["but", "so", "and", "for"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "1. Phân tích nguyên nhân kết quả:<br>Nam lười học bài -> Nam trượt kỳ thi.<br>• <span class='exp-word'>so</span>: vì vậy.<br>2. Dịch nghĩa: 'Nam đã không chịu ôn tập chăm chỉ, vì thế cậu ấy đã thi trượt mất rồi.'<br>3. Tại sao chọn so? 'so' đứng trước mệnh đề kết quả buồn của việc lười học."
+                    },
+                    {
+                        id: "ex4_57",
+                        q: "Lily was not satisfied with her essay; __________, she submitted it yesterday.",
+                        options: ["therefore", "otherwise", "however", "besides"],
+                        answer: "however",
+                        type: "mcq",
+                        exp: "1. Phân tích tương phản nghịch lý:<br>Không hài lòng với bài viết >< Vẫn nộp bài viết lên ngày hôm qua.<br>• <span class='exp-word'>however</span>: tuy nhiên.<br>2. Dịch nghĩa: 'Lily thấy chưa thực sự ưng ý với bài văn của mình; tuy nhiên, bạn ấy vẫn quyết định nộp nó lên vào hôm qua.'<br>3. Tại sao chọn however? Diễn tả hành vi bất chấp sự thiếu hài lòng cá nhân."
+                    },
+                    {
+                        id: "ex4_58",
+                        q: "I was very tired, __________ I tried to finish my homework.",
+                        options: ["but", "so", "for", "and"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "1. Phân tích tương phản:<br>Cơ thể rất mệt mỏi >< Vẫn cố gắng hoàn thành đống bài tập về nhà.<br>• <span class='exp-word'>but</span>: nhưng.<br>2. Dịch nghĩa: 'Tôi thấy mệt rã rời trong người, nhưng tôi vẫn cố gắng thức hoàn thiện đống bài tập của mình.'<br>3. Tại sao chọn but? Thể hiện nghị lực vượt qua sự mệt mỏi thể chất."
+                    },
+                    {
+                        id: "ex4_59",
+                        q: "Try to join some clubs and make friends; __________, you will be very stressed.",
+                        options: ["however", "therefore", "otherwise", "moreover"],
+                        answer: "otherwise",
+                        type: "mcq",
+                        exp: "1. Phân tích liên từ giả định giả thuyết hại:<br>Lời khuyên: Hãy tham gia câu lạc bộ làm quen bạn bè. Hậu quả nếu không làm: Bị stress cực nặng.<br>• <span class='exp-word'>otherwise</span>: nếu không thì.<br>2. Dịch nghĩa: 'Con hãy tích cực tham gia câu lạc bộ trường và giao lưu bạn mới; nếu không thì, con sẽ dễ rơi vào trạng thái stress cực kỳ.'<br>3. Tại sao chọn otherwise? Chỉ rõ viễn cảnh cô đơn nếu sống khép kín."
+                    },
+                    {
+                        id: "ex4_60",
+                        q: "More and more teenagers are using social media, __________ they help them to release.",
+                        options: ["and", "but", "or", "for"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "1. Phân tích lý do nguyên nhân:<br>Tại sao giới trẻ chuộng mạng xã hội? Vì mạng xã hội giúp họ giải tỏa căng thẳng (release).<br>• <span class='exp-word'>for</span>: vì, bởi vì (thay thế because).<br>2. Dịch nghĩa: 'Ngày càng nhiều bạn trẻ dùng mạng xã hội, bởi vì chúng giúp họ giải tỏa bớt áp lực tinh thần.'<br>3. Tại sao chọn for? Thích hợp cấu trúc phẩy 'for' mệnh đề nguyên nhân."
+                    },
+                    {
+                        id: "ex4_61",
+                        q: "The teacher asks the whole class to _______ on studying to prepare well for the midterm exam.",
+                        options: ["advise", "focus", "connect", "coach"],
+                        answer: "focus",
+                        type: "mcq",
+                        exp: "1. Phân tích giới từ đi cùng động từ:<br>• <span class='exp-word'>focus on</span>: tập trung tinh thần vào nhiệm vụ gì.<br>2. Dịch nghĩa: 'Cô giáo yêu cầu cả lớp tập trung cao độ vào việc tự học để đạt kết quả thi giữa kỳ thật xuất sắc.'<br>3. Tại sao chọn focus? Vì chỉ có 'focus' mới kết hợp hoàn hảo giới từ 'on' ở đằng sau."
+                    },
+                    {
+                        id: "ex4_62",
+                        q: "Most teenagers today have at least one social media _______ for entertainment and study.",
+                        options: ["account", "leader", "midterm", "teenager"],
+                        answer: "account",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng công nghệ:<br>• <span class='exp-word'>social media account</span>: tài khoản mạng xã hội cá nhân.<br>2. Dịch nghĩa: 'Hầu hết các bạn học sinh thời nay đều sở hữu ít nhất một tài khoản mạng xã hội để vừa giải trí vừa trao đổi bài học.'<br>3. Tại sao chọn account? Cụm từ thông dụng chỉ quyền truy cập mạng cá nhân."
+                    },
+                    {
+                        id: "ex4_63",
+                        q: "Ally tries to overcome the _______ from her family by studying hard to get the best results.",
+                        options: ["media", "teamwork", "website", "pressure"],
+                        answer: "pressure",
+                        type: "mcq",
+                        exp: "1. Phân tích danh từ chỉ sức ép tâm lý:<br>• <span class='exp-word'>pressure</span> <span class='exp-ipa'>[ /ˈpreʃə(r)/ ]</span>: áp lực từ gia đình kỳ vọng.<br>2. Dịch nghĩa: 'Ally luôn cố gắng vượt qua áp lực nặng nề từ kỳ vọng của gia đình bằng cách chăm chỉ học tập giành điểm cao nhất.'<br>3. Tại sao chọn pressure? 'overcome the pressure' nghĩa là chiến thắng, vượt qua sức ép tâm lý."
+                    },
+                    {
+                        id: "ex4_64",
+                        q: "According to many surveys, teenagers now find it interesting to _______ their short videos on TikTok.",
+                        options: ["post", "avoid", "go", "check"],
+                        answer: "post",
+                        type: "post",
+                        exp: "1. Phân tích hành vi làm nội dung video:<br>• <span class='exp-word'>post video</span>: đăng tải, chia sẻ thước phim ngắn lên ứng dụng.<br>2. Dịch nghĩa: 'Theo nhiều khảo sát, giới trẻ ngày nay vô cùng hào hứng với việc đăng tải các clip ngắn tự sản xuất lên TikTok.'<br>3. Tại sao chọn post? Phù hợp nhất để diễn đạt thao tác chia sẻ nội dung lên máy chủ mạng."
+                    },
+                    {
+                        id: "ex4_65",
+                        q: "Most of the students are associated with _______ or sports teams.",
+                        options: ["school clubs", "stress", "account", "pressure"],
+                        answer: "school clubs",
+                        type: "mcq",
+                        exp: "1. Phân tích từ vựng học đường danh từ số nhiều song hành:<br>• <span class='exp-word'>school clubs</span>: các câu lạc bộ của nhà trường.<br>2. Dịch nghĩa: 'Phần lớn các học sinh đều tích cực tham gia vào các câu lạc bộ nhà trường hoặc các đội tuyển thể thao tranh tài.'<br>3. Tại sao chọn school clubs? 'sports teams' song hành với 'school clubs' chỉ các hoạt động ngoại khóa lành mạnh."
+                    }
+                ]
+            },
+            "ex5": {
+                title: "Exercise 5: Fill in the blanks with the correct conjunctions",
+                desc: "Chọn từ liên từ phù hợp nhất điền vào chỗ trống: and, therefore, otherwise, so, however, but, or, for.",
+                questions: [
+                    {
+                        id: "ex5_1",
+                        q: "Mary didn't go on a picnic yesterday, [conjunction] she was sick.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "for",
+                        type: "gapfill",
+                        exp: "Vì Mary bị ốm nên không đi dã ngoại. Liên từ chỉ nguyên nhân đứng sau dấu phẩy phù hợp nhất là 'for' (bởi vì)."
+                    },
+                    {
+                        id: "ex5_2",
+                        q: "Dung couldn't find the answer to the question, [conjunction] she asked her teacher for help.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "so",
+                        type: "gapfill",
+                        exp: "Dũng không giải được câu hỏi khó -> hệ quả: nhờ cô giáo trợ giúp. Ta chọn liên từ chỉ kết quả 'so' (vì thế)."
+                    },
+                    {
+                        id: "ex5_3",
+                        q: "It was raining heavily, [conjunction] he went home without a raincoat.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "but",
+                        type: "gapfill",
+                        exp: "Trời mưa rất to nhưng anh ta vẫn đầu trần ra về không mặc áo mưa. Sự tương phản nghịch lý này đòi hỏi liên từ 'but'."
+                    },
+                    {
+                        id: "ex5_4",
+                        q: "Jack is good at playing chess, [conjunction] he also plays the guitar well.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "and",
+                        type: "gapfill",
+                        exp: "Jack vừa đấu cờ giỏi lại vừa chơi đàn hay. Nối hai tài năng xuất sắc đồng đẳng bằng liên từ 'and' (và)."
+                    },
+                    {
+                        id: "ex5_5",
+                        q: "We are hungry now; [conjunction], we have nothing to eat.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "however",
+                        type: "gapfill",
+                        exp: "Chúng tôi đang đói bụng cồn cào; tuy nhiên, bếp lại hết sạch đồ ăn. Sự trái ngược nghịch cảnh dùng trạng từ nối 'however' sau dấu ';'."
+                    },
+                    {
+                        id: "ex5_6",
+                        q: "It is hot and sunny today; [conjunction], I want to go swimming in the cool pool.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "therefore",
+                        type: "gapfill",
+                        exp: "Trời nắng nóng -> do đó, nảy sinh ý muốn đi bơi mát mẻ. Ta dùng trạng từ nối chỉ kết quả hệ quả hợp logic học thuật 'therefore'."
+                    },
+                    {
+                        id: "ex5_7",
+                        q: "She thinks she should stay at home and relax, [conjunction] she should hang out with her friends.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "or",
+                        type: "gapfill",
+                        exp: "Lựa chọn 1: Ở nhà nghỉ ngơi. Lựa chọn 2: Đi chơi cùng bạn bè. Ta dùng liên từ chỉ sự tuyển chọn 'or' (hoặc là)."
+                    },
+                    {
+                        id: "ex5_8",
+                        q: "He should leave his home early; [conjunction], he will miss the train.",
+                        choices: ["and", "therefore", "otherwise", "so", "however", "but", "or", "for"],
+                        answer: "otherwise",
+                        type: "gapfill",
+                        exp: "Anh ta phải rời nhà sớm; nếu không thì sẽ bị lỡ mất chuyến tàu hỏa. Ta chọn từ chỉ giả thiết loại trừ tiêu cực 'otherwise'."
+                    }
+                ]
+            },
+            "ex6": {
+                title: "Exercise 6: Match the pictures and choose options",
+                desc: "Hãy bấm nút xem tranh đồ họa và lựa chọn đáp án phù hợp nhất cho hoạt động.",
+                questions: [
+                    {
+                        id: "ex6_1",
+                        q: "I decided to join [option].",
+                        options: ["table tennis club", "music club", "chess club"],
+                        graphic: "chess",
+                        answer: "chess club",
+                        type: "picture_select",
+                        exp: "Tranh vẽ quân cờ vua tuyệt đẹp tượng trưng cho 'chess club'. Cậu bé quyết định tham gia câu lạc bộ cờ vua."
+                    },
+                    {
+                        id: "ex6_2",
+                        q: "I learn a lot of new vocabulary from [option].",
+                        options: ["sports club", "English club", "Judo club"],
+                        graphic: "english",
+                        answer: "English club",
+                        type: "picture_select",
+                        exp: "Tranh vẽ cuốn từ điển tiếng Anh dày dặn tượng trưng cho 'English club' để trau dồi vốn từ phong phú."
+                    },
+                    {
+                        id: "ex6_3",
+                        q: "They take part in sports, for they like [option].",
+                        options: ["doing judo", "playing badminton", "playing volleyball"],
+                        graphic: "volleyball",
+                        answer: "playing volleyball",
+                        type: "picture_select",
+                        exp: "Tranh vẽ quả bóng chuyền và tấm lưới sân thi đấu thể thao tượng trưng cho 'playing volleyball'."
+                    },
+                    {
+                        id: "ex6_4",
+                        q: "My friends are making [option] in the arts and crafts club.",
+                        options: ["cakes", "cards", "clothes"],
+                        graphic: "cards",
+                        answer: "cards",
+                        type: "picture_select",
+                        exp: "Bức tranh vẽ những phong thư, thiệp giấy màu sắc tự chế khéo léo 'cards' của câu lạc bộ thủ công mỹ nghệ."
+                    },
+                    {
+                        id: "ex6_5",
+                        q: "We are [option] for the midterm tests.",
+                        options: ["studying hard", "playing games", "going out"],
+                        graphic: "study",
+                        answer: "studying hard",
+                        type: "picture_select",
+                        exp: "Bức vẽ bạn học sinh ngồi nghiêm túc bên bàn học đèn sáng ban đêm tượng trưng cho tinh thần 'studying hard'."
+                    },
+                    {
+                        id: "ex6_6",
+                        q: "She likes [option]; therefore, she joins a music club.",
+                        options: ["staying at home", "singing", "going to the park"],
+                        graphic: "singing",
+                        answer: "singing",
+                        type: "picture_select",
+                        exp: "Hình ảnh chiếc micro vàng óng cùng các nốt nhạc bay lượn tượng trưng cho đam mê ca hát 'singing'."
+                    },
+                    {
+                        id: "ex6_7",
+                        q: "It is a freezy day today, so I really want to [option].",
+                        options: ["have a glass of hot chocolate", "make a hot cake", "go skiing"],
+                        graphic: "chocolate",
+                        answer: "have a glass of hot chocolate",
+                        type: "picture_select",
+                        exp: "Hình ảnh cốc sô-cô-la nóng bốc khói ấm áp giữa ngày đông lạnh giá: 'have a glass of hot chocolate'."
+                    },
+                    {
+                        id: "ex6_8",
+                        q: "He has a bad toothache, but he doesn't [option].",
+                        options: ["go skateboarding", "have a birthday party", "go to see the dentist"],
+                        graphic: "dentist",
+                        answer: "go to see the dentist",
+                        type: "picture_select",
+                        exp: "Hình vẽ chiếc răng lung linh lấp lánh và chiếc gương nha sĩ, khuyên bảo cậu bé đau răng đi khám 'go to see the dentist'."
+                    }
+                ]
+            },
+            "ex7": {
+                title: "Exercise 7: Choose the best conjunction to complete compound sentences",
+                desc: "Chọn liên từ thích hợp nhất trong ngoặc để hoàn thành câu ghép.",
+                questions: [
+                    {
+                        id: "ex7_1",
+                        q: "The injured man was incapable of walking, _______ he had to be carried. (but / and / so)",
+                        options: ["but", "and", "so"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "Người đàn ông bị thương không thể tự đi bộ -> kết quả: mọi người phải khiêng cáng anh ấy đi. Chọn liên từ chỉ kết quả 'so'."
+                    },
+                    {
+                        id: "ex7_2",
+                        q: "It may rain tomorrow, _______ we are going home in any case. (but / nor / and)",
+                        options: ["but", "nor", "and"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "Trời ngày mai có thể sẽ đổ mưa to nhưng chúng tôi dù gì vẫn quyết tâm quay về nhà. Chọn liên từ tương phản 'but'."
+                    },
+                    {
+                        id: "ex7_3",
+                        q: "I bought these three shirts, _______ they gave me another one for free. (for / and / or)",
+                        options: ["for", "and", "or"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "Tôi mua 3 chiếc áo sơ mi này, và cửa hàng còn tặng kèm thêm 1 chiếc nữa miễn phí. Ta dùng 'and' để thêm thông tin bổ sung."
+                    },
+                    {
+                        id: "ex7_4",
+                        q: "The discussion was not exciting, _______ was it informative. (or / so / nor)",
+                        options: ["or", "so", "nor"],
+                        answer: "nor",
+                        type: "mcq",
+                        exp: "Cuộc thảo luận đó không hề thú vị, mà nó cũng chẳng cung cấp nhiều thông tin bổ ích. Cấu trúc phủ định song hành dùng 'nor' đi kèm đảo ngữ."
+                    },
+                    {
+                        id: "ex7_5",
+                        q: "I made a suggestion, _______ they chose to ignore it. (so / but / nor)",
+                        options: ["so", "but", "nor"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "Tôi đã đưa ra ý kiến gợi ý chân thành, nhưng họ lại nhẫn tâm phớt lờ nó đi. Ta dùng liên từ tương phản đối lập mạnh mẽ 'but'."
+                    },
+                    {
+                        id: "ex7_6",
+                        q: "The police have sold the car in auction, _______ no one came to take it. (but / so / for)",
+                        options: ["but", "so", "for"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "Cảnh sát đem thanh lý đấu giá chiếc xe hơi, bởi vì không một ai tới nhận lại nó sau thời hạn. Dùng 'for' (bởi vì) để giải thích lý do thanh lý."
+                    },
+                    {
+                        id: "ex7_7",
+                        q: "Whale Festival is the biggest festival of the fishermen, _______ it is common. (and / but / or)",
+                        options: ["and", "but", "or"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "Lễ hội Cá Ông là ngày hội lớn nhất của ngư dân miền biển, và nó cũng cực kỳ phổ biến rộng rãi. Chọn liên từ bổ trợ thông tin 'and'."
+                    },
+                    {
+                        id: "ex7_8",
+                        q: "The staff in our company can dine out, _______ they can order in. (so / or / for)",
+                        options: ["so", "or", "for"],
+                        answer: "or",
+                        type: "mcq",
+                        exp: "Nhân viên công ty có thể ra ngoài ăn hàng, hoặc có thể đặt đồ giao tận văn phòng làm việc. Sự lựa chọn tự do dùng liên từ tuyển lựa 'or'."
+                    },
+                    {
+                        id: "ex7_9",
+                        q: "Dorothy works ten hours a day, _______ he has time to volunteer at a charity. (yet / and / nor)",
+                        options: ["yet", "and", "nor"],
+                        answer: "yet",
+                        type: "mcq",
+                        exp: "Dorothy làm việc vất vả 10 tiếng một ngày, vậy mà anh ấy vẫn thu xếp thời gian làm từ thiện. Sự ngạc nhiên nghịch lý dùng liên từ 'yet' (vậy mà, tuy nhiên)."
+                    },
+                    {
+                        id: "ex7_10",
+                        q: "She looks shy and skinny, _______ she is a karate athlete. (or / yet / and)",
+                        options: ["or", "yet", "and"],
+                        answer: "yet",
+                        type: "mcq",
+                        exp: "Cô bé trông có vẻ nhút nhát và gầy gò mảnh mai, vậy mà lại là một võ sĩ đai đen Karate thực thụ. Sử dụng trạng từ tương phản cực tốt 'yet'."
+                    }
+                ]
+            },
+            "ex8": {
+                title: "Exercise 8: Synonyms (Word CLOSEST in meaning)",
+                desc: "Tìm từ/cụm từ đồng nghĩa sát nhất với phần được in đậm bên dưới.",
+                questions: [
+                    {
+                        id: "ex8_1",
+                        q: "When someone tries to log into some of your TikTok accounts, the system will send you a <strong>notification</strong>.",
+                        options: ["notice", "media", "midterm test", "stress"],
+                        answer: "notice",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>notification</span>: sự báo cáo thông báo hệ thống mạng. Đồng nghĩa sát nhất là danh từ <span class='exp-word'>notice</span> (thông tri, tin nhắn báo hiệu)."
+                    },
+                    {
+                        id: "ex8_2",
+                        q: "The <strong>pressure</strong> from my parents and friends makes me feel very stressed.",
+                        options: ["stress", "competition", "schoolwork", "leader"],
+                        answer: "stress",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>pressure</span>: sức ép, áp lực tinh thần. Đồng nghĩa sát nhất là danh từ <span class='exp-word'>stress</span> (sự căng thẳng, áp lực học tập)."
+                    },
+                    {
+                        id: "ex8_3",
+                        q: "Many <strong>teenagers</strong> find themselves unable to go a few minutes without checking their social media accounts.",
+                        options: ["men", "youths", "children", "boys"],
+                        answer: "youths",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>teenagers</span>: lứa tuổi thanh thiếu niên từ 13-19. Đồng nghĩa sát nhất là danh từ <span class='exp-word'>youths</span> (giới trẻ, thanh niên)."
+                    },
+                    {
+                        id: "ex8_4",
+                        q: "She has a habit of <strong>posting</strong> pictures of herself on Facebook every day.",
+                        options: ["checking", "uploading", "updating", "browsing"],
+                        answer: "uploading",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>posting</span>: hành động đăng tải bài viết/hình lên mạng. Đồng nghĩa sát nhất là danh động từ <span class='exp-word'>uploading</span> (tải tệp lên hệ thống dữ liệu đám mây)."
+                    },
+                    {
+                        id: "ex8_5",
+                        q: "To <strong>concentrate</strong> on my work, I make a conscious effort to silence my phone.",
+                        options: ["advise", "discuss", "focus", "upload"],
+                        answer: "focus",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>concentrate</span>: tập trung trí lực tối đa. Đồng nghĩa sát nhất là động từ <span class='exp-word'>focus</span> (hướng tiêu điểm tập trung hoàn toàn vào sự việc)."
+                    }
+                ]
+            },
+            "ex9": {
+                title: "Exercise 9: Antonyms (Word OPPOSITE in meaning)",
+                desc: "Tìm từ/cụm từ có ý nghĩa trái ngược nghịch hoàn toàn với từ được in đậm.",
+                questions: [
+                    {
+                        id: "ex9_1",
+                        q: "When I <strong>log on</strong> to my computer, the first thing I do is open my Facebook account.",
+                        options: ["log out", "cross over", "focus on", "keep up with"],
+                        answer: "log out",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>log on</span>: đăng nhập vào máy chủ mạng. Trái nghĩa hoàn hảo nhất chính là cụm động từ <span class='exp-word'>log out</span> (đăng xuất, ngắt kết nối an toàn)."
+                    },
+                    {
+                        id: "ex9_2",
+                        q: "Instagram is <strong>enjoyable</strong>. I feel very happy when someone likes my photos.",
+                        options: ["bored", "happy", "peaceful", "quiet"],
+                        answer: "bored",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>enjoyable</span>: thú vị ngọt ngào đem lại hạnh phúc. Trái nghĩa trực diện chính là tính từ chỉ trạng thái chán ngắt, buồn tẻ <span class='exp-word'>bored</span>."
+                    },
+                    {
+                        id: "ex9_3",
+                        q: "Mary is into making crafts. She should <strong>participate in</strong> the arts and crafts club at school.",
+                        options: ["good at", "not keep in touch", "famous for", "not take part in"],
+                        answer: "not take part in",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>participate in</span>: tích cực tham gia vào hoạt động. Trái nghĩa hoàn toàn là cụm phủ định từ chối tham dự <span class='exp-word'>not take part in</span>."
+                    },
+                    {
+                        id: "ex9_4",
+                        q: "YouTube is one of the most <strong>popular</strong> social media sites nowadays.",
+                        options: ["collective", "enjoyable", "uncommon", "user-friendly"],
+                        answer: "uncommon",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>popular</span>: cực kỳ phổ biến, nổi tiếng đại chúng. Trái nghĩa sâu sắc chính là tính từ hiếm gặp, không thông dụng <span class='exp-word'>uncommon</span>."
+                    },
+                    {
+                        id: "ex9_5",
+                        q: "Teen social media addiction can <strong>negatively</strong> impact offline relationships.",
+                        options: ["impressively", "positively", "attractively", "nearly"],
+                        answer: "positively",
+                        type: "mcq",
+                        exp: "• <span class='exp-word'>negatively</span>: một cách tiêu cực, có hại xấu. Trái nghĩa hoàn toàn chính là trạng từ chỉ sự tích cực, có ích <span class='exp-word'>positively</span>."
+                    }
+                ]
+            },
+            "ex10": {
+                title: "Exercise 10: Circle correct word to complete sentences",
+                desc: "Bấm vào các từ cho trước để chọn từ liên từ chính xác hoàn chỉnh ý nghĩa câu.",
+                questions: [
+                    {
+                        id: "ex10_1",
+                        q: "Jane likes drinking orange juice, _______ she hates tea. (and / but / so)",
+                        options: ["and", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "Sự đối lập giữa thích uống nước cam và ghét trà buộc dùng liên từ tương phản 'but'."
+                    },
+                    {
+                        id: "ex10_2",
+                        q: "My teacher didn't go to work today, _______ he was ill. (but / and / for)",
+                        options: ["but", "and", "for"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "Lý do vắng mặt của giáo viên: bị ốm đau. Ta dùng liên từ giải thích nguyên nhân đứng sau dấu phẩy 'for' (bởi vì)."
+                    },
+                    {
+                        id: "ex10_3",
+                        q: "My brother _______ my sister have breakfast at 7 a.m. (and / but / for)",
+                        options: ["and", "but", "for"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "Cả hai anh em trai và chị gái cùng nhau ăn sáng. Ta dùng liên từ kết nối đẳng lập bổ sung 'and'."
+                    },
+                    {
+                        id: "ex10_4",
+                        q: "You should listen to your teacher's guide, _______ you will not do the exercise. (but / or / and)",
+                        options: ["but", "or", "and"],
+                        answer: "or",
+                        type: "mcq",
+                        exp: "Khuyên bảo nghe giảng cô giáo, nếu không thì sẽ không biết làm bài tập đâu nhé. Chọn liên từ chỉ hậu quả loại trừ 'or' (hoặc là)."
+                    },
+                    {
+                        id: "ex10_5",
+                        q: "Do you prefer studying online _______ offline? (to / for / than)",
+                        options: ["to", "for", "than"],
+                        answer: "to",
+                        type: "mcq",
+                        exp: "Cấu trúc so sánh sở thích kinh điển: 'prefer V-ing to V-ing' (thích làm cái gì hơn làm cái gì khác). Chọn giới từ nối 'to'."
+                    },
+                    {
+                        id: "ex10_6",
+                        q: "It is about 5 kilometres from his house to school, _______ he often walks. (and / so / but)",
+                        options: ["and", "so", "but"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "Khoảng cách tận 5km khá xa, vậy mà cậu ấy vẫn chọn đi bộ đi học. Sự tương phản nghịch cảnh dùng từ 'but'."
+                    },
+                    {
+                        id: "ex10_7",
+                        q: "We have to study on Saturdays _______ Sundays because we will have an exam next Monday. (so / for / and)",
+                        options: ["so", "for", "and"],
+                        answer: "and",
+                        type: "mcq",
+                        exp: "Phải ôn luyện cả ngày thứ bảy lẫn ngày chủ nhật cho kì thi tuần tới. Chọn liên từ nối bổ sung thông tin đồng thời 'and'."
+                    },
+                    {
+                        id: "ex10_8",
+                        q: "There is no food in the fridge, _______ I will buy some food. (so / but / or)",
+                        options: ["so", "but", "or"],
+                        answer: "so",
+                        type: "mcq",
+                        exp: "Tủ lạnh trống trơn không còn đồ ăn -> quyết định đi siêu thị mua sắm ngay. Chọn liên từ nhân quả 'so'."
+                    },
+                    {
+                        id: "ex10_9",
+                        q: "It is so hot today, _______ he has to work outdoors. (and / but / so)",
+                        options: ["and", "but", "so"],
+                        answer: "but",
+                        type: "mcq",
+                        exp: "Trời hôm nay nắng như đổ lửa, nhưng anh ta bắt buộc phải thi công công trình ngoài trời. Chọn 'but'."
+                    },
+                    {
+                        id: "ex10_10",
+                        q: "I never eat fish, _______ I don't like fish. (so / for / but)",
+                        options: ["so", "for", "but"],
+                        answer: "for",
+                        type: "mcq",
+                        exp: "Lý do tôi không bao giờ ăn cá: vì tôi ghét ăn cá cực kỳ. Liên từ giải thích nguyên nhân thích hợp sau dấu phẩy là 'for'."
+                    }
+                ]
+            },
+            "ex11": {
+                title: "Exercise 11: Simple (S) vs Compound (C) Sentences",
+                desc: "Phân loại câu đơn (S - Simple) hay câu ghép (C - Compound) có chứa liên từ nối.",
+                questions: [
+                    { id: "ex11_1", q: "It is now the harvest time in my countryside.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu chỉ có một mệnh đề độc lập duy nhất với 1 chủ ngữ và 1 vị ngữ." },
+                    { id: "ex11_2", q: "The food in this restaurant is delicious, so a lot of people enjoy meals here.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép gồm hai mệnh đề độc lập kết nối bằng liên từ hệ quả 'so'." },
+                    { id: "ex11_3", q: "He has a bad toothache, for he hasn't brushed his teeth for a long time.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép kết nối hai mệnh đề nguyên nhân kết quả độc lập bằng liên từ 'for'." },
+                    { id: "ex11_4", q: "Last Sunday, we visited Ha Long Bay and Quang Ninh Library.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn có chủ ngữ ghép (we) cùng động từ chung hướng về hai danh từ tân ngữ ghép." },
+                    { id: "ex11_5", q: "She took a bus to work, but it was crowded. She felt uncomfortable.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép chứa mệnh đề nối kết bằng liên từ tương phản 'but' rõ ràng." },
+                    { id: "ex11_6", q: "My grandfather is interested in reading stories for us before bed.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn chứa một mệnh đề độc lập với trạng ngữ chỉ thời gian đứng sau." },
+                    { id: "ex11_7", q: "The weather is hot in summer; therefore, we like going swimming.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép liên kết bằng trạng từ chỉ kết quả 'therefore' ngăn cách dấu chấm phẩy." },
+                    { id: "ex11_8", q: "They took part in the competition, but they did not win any prizes.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép kết nối bằng liên từ tương phản 'but' kết hợp hai hành động đối nghịch." },
+                    { id: "ex11_9", q: "Don't do anything stupid like that, or I will punish you.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép kết hợp mệnh đề mệnh lệnh và mệnh đề giả định hậu quả thông qua liên từ loại trừ 'or'." },
+                    { id: "ex11_10", q: "He has come back from a long flight; however, he doesn't feel tired.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép liên kết chặt chẽ bằng trạng từ nhượng bộ đối lập 'however'." },
+                    { id: "ex11_11", q: "She is my aunt.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn ngắn nhất chỉ gồm 1 chủ ngữ 'she' và 1 vị ngữ." },
+                    { id: "ex11_12", q: "Thomas speaks Vietnamese fluently.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn có cấu trúc S-V-O đi kèm trạng từ bổ nghĩa cách thức." },
+                    { id: "ex11_13", q: "Mai and Hoa enjoy playing table tennis.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn có hai chủ ngữ ghép song hành cùng chung một hành động đam mê phía sau." },
+                    { id: "ex11_14", q: "Linda sings and Peter plays the guitar.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép nối hai mệnh đề độc lập đầy đủ chủ vị bằng liên từ bổ sung 'and'." },
+                    { id: "ex11_15", q: "Nga likes reading, so she bought a lot of books.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép nhân quả nối kết mệnh đề bằng liên từ chỉ kết quả 'so'." },
+                    { id: "ex11_16", q: "I went to Ha Noi and visited some temples and pagodas there.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn có vị ngữ ghép nối tiếp hành động của một chủ ngữ duy nhất 'I'." },
+                    { id: "ex11_17", q: "She is a smart student, and she is an active member of our club.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép hai mệnh đề độc lập chỉ đặc tính tích cực nối kết nhau bằng 'and'." },
+                    { id: "ex11_18", q: "Mary wants to join the school chess club; however, she can’t play chess.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép tương phản liên kết bằng phó từ nhượng bộ 'however'." },
+                    { id: "ex11_19", q: "We go shopping, go to the cinema, and play sport together.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "S (Simple sentence)", type: "mcq", exp: "Câu đơn có một chủ ngữ 'We' thực hiện liệt kê chuỗi 3 hành động vui chơi." },
+                    { id: "ex11_20", q: "She has prepared everything for her performance, but she feels nervous.", options: ["S (Simple sentence)", "C (Compound sentence)"], answer: "C (Compound sentence)", type: "mcq", exp: "Câu ghép tương phản tâm lý kết nối hai mệnh đề bằng liên từ nghịch lý 'but'." }
+                ]
+            },
+            "ex12": {
+                title: "Exercise 12: Match halves to make complete sentences",
+                desc: "Chọn nửa câu còn lại phù hợp nhất để ghép nối thành câu ghép có nghĩa.",
+                questions: [
+                    {
+                        id: "ex12_1",
+                        q: "Nửa câu đầu: 'Phuong plays chess well, ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "so she decided to join a chess tournament this year.",
+                        type: "mcq",
+                        exp: "Phương chơi cờ vua rất giỏi -> vì vậy cô ấy quyết tâm đăng ký giải đấu cờ vua năm nay để tranh giải."
+                    },
+                    {
+                        id: "ex12_2",
+                        q: "Nửa câu đầu: 'Parents should spend time talking to teenagers, ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "for they need to share sadness and happiness.",
+                        type: "mcq",
+                        exp: "Bố mẹ nên chịu khó tâm sự với con trẻ dậy thì, bởi vì chúng rất cần sẻ chia nỗi buồn và niềm vui trong cuộc sống."
+                    },
+                    {
+                        id: "ex12_3",
+                        q: "Nửa câu đầu: 'I want to learn how to play the guitar; ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "therefore, I take part in a music club.",
+                        type: "mcq",
+                        exp: "Tôi khao khát học chơi guitar; do đó, tôi đã chủ động gia nhập câu lạc bộ âm nhạc trường học."
+                    },
+                    {
+                        id: "ex12_4",
+                        q: "Nửa câu đầu: 'We should learn teamwork, ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "and we should also have communication skills.",
+                        type: "mcq",
+                        exp: "Chúng ta cần rèn luyện tinh thần làm việc nhóm hiệu quả, và chúng ta cũng nên trang bị tốt kỹ năng giao tiếp xã hội."
+                    },
+                    {
+                        id: "ex12_5",
+                        q: "Nửa câu đầu: 'Could you tell me ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "more information about sports club?",
+                        type: "mcq",
+                        exp: "Cấu trúc đề nghị xin thông tin lịch sự: 'Could you tell me + cụm danh từ làm tân ngữ?' -> 'more information about...'"
+                    },
+                    {
+                        id: "ex12_6",
+                        q: "Nửa câu đầu: 'It didn't rain for almost a month, ...'",
+                        options: [
+                            "so she decided to join a chess tournament this year.",
+                            "and we should also have communication skills.",
+                            "therefore, I take part in a music club.",
+                            "so farmers had to water their plants in the fields.",
+                            "for they need to share sadness and happiness.",
+                            "more information about sports club?"
+                        ],
+                        answer: "so farmers had to water their plants in the fields.",
+                        type: "mcq",
+                        exp: "Trời khô hạn không một hạt mưa suốt một tháng ròng -> vì thế, nông dân phải vất vả kéo nước tưới cây cứu hoa màu trên ruộng."
+                    }
+                ]
+            },
+            "ex13": {
+                title: "Exercise 13: Fill in suitable conjunctions to complete compound sentences",
+                desc: "Chọn liên từ thích hợp điền vào chỗ trống để tạo thành câu ghép hoàn chỉnh nhất.",
+                questions: [
+                    { id: "ex13_1", q: "I broke my glasses yesterday, [conjunction] I didn’t see things clearly.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Tôi làm gãy mất kính cận ngày hôm qua -> hậu quả kết quả: không nhìn rõ mọi thứ xung quanh. Chọn 'so'." },
+                    { id: "ex13_2", q: "My brother doesn’t socialize much, [conjunction] he has very few friends.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Anh trai tôi khép kín lười giao tiếp xã hội -> hệ quả tất yếu: có cực kỳ ít bạn bè thân thiết. Chọn 'so'." },
+                    { id: "ex13_3", q: "A new camera is all I want now, [conjunction] I don’t have enough money.", options: ["so", "but", "or", "and"], answer: "but", type: "mcq", exp: "Một chiếc máy ảnh đời mới là ước mơ cháy bỏng lúc này, nhưng khổ nỗi tôi lại không có đủ tiền mua. Chọn liên từ tương phản 'but'." },
+                    { id: "ex13_4", q: "Peter doesn’t feel well today, [conjunction] he is absent from school.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Hôm nay Peter thấy mệt mỏi trong người -> vì thế cậu ấy xin phép nghỉ học ở lớp. Chọn 'so'." },
+                    { id: "ex13_5", q: "They thought they won the match, [conjunction] it turned out that they were losers.", options: ["so", "but", "or", "and"], answer: "but", type: "mcq", exp: "Họ cứ ngỡ là mình đã thắng cuộc rồi, nhưng hóa ra sự thật phũ phàng họ lại là những kẻ thua cuộc. Chọn từ 'but' chỉ nghịch lý tương phản." },
+                    { id: "ex13_6", q: "It is a challenging task, [conjunction] it takes me a lot of time to do it.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Đây là một thử thách vô cùng gian nan -> kết quả: nó lấy đi của tôi vô khối thời gian công sức để hoàn thành. Chọn 'so'." },
+                    { id: "ex13_7", q: "My computer is brand new, [conjunction] I encounter some problems when I use it.", options: ["so", "yet", "or", "and"], answer: "yet", type: "mcq", exp: "Chiếc máy tính mới kính coong vừa mua xong, vậy mà tôi vẫn gặp phải một số lỗi kỹ thuật phiền toái khi vận hành. Sử dụng trạng từ tương phản cực tốt 'yet'." },
+                    { id: "ex13_8", q: "Did you stay at home last night [conjunction] did you go out with your friends?", options: ["so", "but", "or", "and"], answer: "or", type: "mcq", exp: "Tối hôm qua cậu ở nhà ôn bài hay là cậu đi chơi phố cùng bạn bè thế? Câu hỏi sự lựa chọn luân phiên dùng 'or'." },
+                    { id: "ex13_9", q: "I have many things to do tonight, [conjunction] I reject my friend’s invitation to her party.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Tôi có ngập đầu việc phải xử lý tối nay -> vì thế tôi bắt buộc phải từ chối lời mời dự tiệc sinh nhật của bạn. Chọn 'so'." },
+                    { id: "ex13_10", q: "My siblings and I don’t share many similarities, [conjunction] we are in harmony with each other.", options: ["so", "but", "or", "and"], answer: "but", type: "mcq", exp: "Anh chị em tôi không có nhiều nét tương đồng tính cách, nhưng chúng tôi vẫn sống hòa thuận ấm áp với nhau. Chọn 'but'." },
+                    { id: "ex13_11", q: "My father wants me to become a doctor, [conjunction] I want to become a designer.", options: ["so", "but", "or", "and"], answer: "but", type: "mcq", exp: "Bố muốn tôi phấn đấu làm bác sĩ cứu người, nhưng đam mê của tôi lại là trở thành một nhà thiết kế đồ họa. Chọn liên từ tương phản 'but'." },
+                    { id: "ex13_12", q: "Should I stay in and watch TV [conjunction] should I hang out with friends today?", options: ["so", "but", "or", "and"], answer: "or", type: "mcq", exp: "Tôi nên ở nhà xem phim tivi hay là tôi nên đi dạo phố cùng bạn bè ngày hôm nay nhỉ? Đưa ra 2 phương án lựa chọn dùng 'or'." },
+                    { id: "ex13_13", q: "There are many festivals in Vietnam [conjunction] many of them are held in the spring.", options: ["so", "but", "or", "and"], answer: "and", type: "mcq", exp: "Có rất nhiều lễ hội truyền thống đặc sắc tại Việt Nam, và phần lớn các ngày hội này đều tưng bừng tổ chức vào mùa xuân ấm áp. Chọn 'and' để bổ sung thông tin." },
+                    { id: "ex13_14", q: "Mary looks small and thin, [conjunction] she owns great strength.", options: ["so", "yet", "or", "and"], answer: "yet", type: "mcq", exp: "Mary trông nhỏ nhắn mảnh mai lắm, vậy mà cô ấy lại có một sức khỏe phi thường khiến ai cũng kinh ngạc. Chọn 'yet' diễn đạt trạng thái tương phản bất ngờ." },
+                    { id: "ex13_15", q: "This is a complex problem, [conjunction] we need to work together to find the solution.", options: ["so", "but", "or", "and"], answer: "so", type: "mcq", exp: "Đây quả thực là một rắc rối hóc búa -> hệ quả: cả nhóm cần chung tay đoàn kết tìm cách tháo gỡ. Chọn 'so'." }
+                ]
+            },
+            "ex14": {
+                title: "Exercise 14: Find one mistake in each sentence and correct it",
+                desc: "Tìm từ chứa lỗi sai ngữ pháp nghiêm trọng trong câu và chọn cách sửa lỗi tối ưu.",
+                questions: [
+                    {
+                        id: "ex14_1",
+                        q: "He is humorous, <strong>but</strong> he makes friends laugh a lot.",
+                        options: ["but => so", "humorous => humorously", "makes => make"],
+                        answer: "but => so",
+                        type: "mcq",
+                        exp: "Cậu ấy hóm hỉnh -> kết quả: làm bạn bè cười ngả nghiêng. Do đó, liên từ trái nghĩa 'but' sai ngữ cảnh, phải sửa thành liên từ chỉ kết quả 'so'."
+                    },
+                    {
+                        id: "ex14_2",
+                        q: "You can upload this picture on facebook, <strong>for</strong> your friends can see it.",
+                        options: ["for => so", "upload => uploading", "on => with"],
+                        answer: "for",
+                        answer: "for => so",
+                        type: "mcq",
+                        exp: "Con đăng ảnh lên mạng xã hội để cho bạn bè có thể ngắm nó. Giới từ chỉ kết quả/mục đích phù hợp là 'so', chứ không thể giải thích nguyên nhân bằng 'for'."
+                    },
+                    {
+                        id: "ex14_3",
+                        q: "She <strong>takes</strong> part in the English club last year.",
+                        options: ["takes => took", "part => parts", "in => at"],
+                        answer: "takes => took",
+                        type: "mcq",
+                        exp: "Vì trong câu xuất hiện mốc thời gian quá khứ rõ ràng 'last year' nên động từ hiện tại 'takes' phải chuyển thành quá khứ đơn 'took'."
+                    },
+                    {
+                        id: "ex14_4",
+                        q: "We shouldn't spend too <strong>many</strong> time on social media.",
+                        options: ["many => much", "spend => spending", "on => at"],
+                        answer: "many => much",
+                        type: "mcq",
+                        exp: "Danh từ thời gian 'time' là danh từ không đếm được, do đó ta không được dùng 'many' mà phải đổi sang lượng từ 'much' (too much time)."
+                    },
+                    {
+                        id: "ex14_5",
+                        q: "Could you tell me how to log <strong>at</strong> to an account on facebook?",
+                        options: ["at => on", "to tell => tell", "on => with"],
+                        answer: "at => on",
+                        type: "mcq",
+                        exp: "Cụm động từ đăng nhập vào hệ thống mạng là 'log on to' hoặc 'log in to', viết 'log at to' là hoàn toàn sai từ vựng."
+                    },
+                    {
+                        id: "ex14_6",
+                        q: "Nam is a good student in my class; <strong>otherwise</strong>, he helps other students to learn better.",
+                        options: ["otherwise => therefore", "good => well", "better => good"],
+                        answer: "otherwise",
+                        answer: "otherwise => therefore",
+                        type: "mcq",
+                        exp: "Nam học rất giỏi -> vì vậy cậu ấy thường xuyên giúp các bạn khác tiến bộ. Từ chỉ giả thiết loại trừ 'otherwise' sai, cần đổi sang phó từ chỉ kết quả hệ quả 'therefore'."
+                    }
+                ]
+            },
+            "ex15": {
+                title: "Exercise 15: Word Form (Appropriate form of word in brackets)",
+                desc: "Lựa chọn dạng đúng của từ trong ngoặc đơn để hoàn thiện ngữ pháp.",
+                questions: [
+                    {
+                        id: "ex15_1",
+                        q: "In most countries, people legally reach _______ at 18. (adult)",
+                        options: ["adulthood", "adulting", "adults", "adultery"],
+                        answer: "adulthood",
+                        type: "mcq",
+                        exp: "• Đứng sau động từ 'reach' ta cần một danh từ chỉ giai đoạn trưởng thành: <span class='exp-word'>adulthood</span> <span class='exp-ipa'>[ /əˈdʌlthʊd/ ]</span> (tuổi trưởng thành)."
+                    },
+                    {
+                        id: "ex15_2",
+                        q: "He always feels embarrassed about his _______ . (appear)",
+                        options: ["appearance", "appearanceless", "appearing", "appears"],
+                        answer: "appearance",
+                        type: "mcq",
+                        exp: "• Đứng sau tính từ sở hữu 'his' ta cần danh từ chỉ diện mạo vẻ bề ngoài: <span class='exp-word'>appearance</span> <span class='exp-ipa'>[ /əˈpɪərəns/ ]</span> (ngoại hình, diện mạo)."
+                    },
+                    {
+                        id: "ex15_3",
+                        q: "He’s so _______ about his performance at school. (depress)",
+                        options: ["depressed", "depressing", "depression", "depressively"],
+                        answer: "depressed",
+                        type: "mcq",
+                        exp: "• Cấu trúc miêu tả cảm xúc buồn chán của con người: 'be depressed about something' -> <span class='exp-word'>depressed</span> <span class='exp-ipa'>[ /dɪˈprest/ ]</span> (u sầu, thất vọng)."
+                    },
+                    {
+                        id: "ex15_4",
+                        q: "Teens need good friends and _______ teachers at schools. (tolerate)",
+                        options: ["tolerant", "tolerance", "tolerably", "tolerated"],
+                        answer: "tolerant",
+                        type: "mcq",
+                        exp: "• Đứng trước bổ trợ cho danh từ giáo viên 'teachers' cần một tính từ miêu tả tính cách bao dung vị tha: <span class='exp-word'>tolerant</span> <span class='exp-ipa'>[ /ˈtɒlərənt/ ]</span> (bao dung, kiên nhẫn lắng nghe)."
+                    },
+                    {
+                        id: "ex15_5",
+                        q: "Why is _______ pressure good and not good for teens? (parent)",
+                        options: ["parental", "parenthood", "parenting", "parents"],
+                        answer: "parental",
+                        type: "mcq",
+                        exp: "• Đứng trước danh từ áp lực 'pressure' cần tính từ thuộc về cha mẹ: <span class='exp-word'>parental</span> <span class='exp-ipa'>[ /pəˈrentl/ ]</span> (thuộc về cha mẹ) -> 'parental pressure' (áp lực từ cha mẹ)."
+                    },
+                    {
+                        id: "ex15_6",
+                        q: "The teacher told them to stay _______ and work hard. (calm)",
+                        options: ["calm", "calmly", "calmness", "calmed"],
+                        answer: "calm",
+                        type: "mcq",
+                        exp: "• Cấu trúc liên động từ chỉ trạng thái: 'stay + adj' (giữ vẻ bình tĩnh) -> <span class='exp-word'>calm</span> <span class='exp-ipa'>[ /kɑːm/ ]</span>."
+                    },
+                    {
+                        id: "ex15_7",
+                        q: "Cognitive skills are important for teenagers’ _______ . (develop)",
+                        options: ["development", "developing", "develops", "developed"],
+                        answer: "development",
+                        type: "mcq",
+                        exp: "• Đứng sau sở hữu cách 'teenagers’' ta cần danh từ chỉ sự phát triển: <span class='exp-word'>development</span> <span class='exp-ipa'>[ /dɪˈveləpmənt/ ]</span> (sự phát triển trí lực, thể chất)."
+                    },
+                    {
+                        id: "ex15_8",
+                        q: "The schoolwork and examinations are really _______ for teens? (stress)",
+                        options: ["stressful", "stressed", "stressfully", "stressing"],
+                        answer: "stressful",
+                        type: "mcq",
+                        exp: "• Đứng sau tobe 'are' miêu tả đặc tính của sự vật hiện tượng (bài tập và thi cử) là tính từ đuôi -ful: <span class='exp-word'>stressful</span> <span class='exp-ipa'>[ /ˈstresfl/ ]</span> (gây nhiều áp lực căng thẳng)."
+                    },
+                    {
+                        id: "ex15_9",
+                        q: "I found it _______ to join sports activities at school. (enjoy)",
+                        options: ["enjoyable", "enjoyed", "enjoyment", "enjoyably"],
+                        answer: "enjoyable",
+                        type: "mcq",
+                        exp: "• Cấu trúc nhận định trải nghiệm: 'find + it + adj + to V-inf' -> <span class='exp-word'>enjoyable</span> <span class='exp-ipa'>[ /ɪnˈdʒɔɪəbl/ ]</span> (vui vẻ, đầy tính giải trí)."
+                    },
+                    {
+                        id: "ex15_10",
+                        q: "Teenagers want to have more _______ in everything they do. (depend)",
+                        options: ["independence", "independent", "dependently", "dependency"],
+                        answer: "independence",
+                        type: "mcq",
+                        exp: "• Đứng sau động từ và từ chỉ lượng 'have more' ta cần một danh từ chỉ sự độc lập tự chủ: <span class='exp-word'>independence</span> <span class='exp-ipa'>[ /ˌɪndɪˈpendəns/ ]</span> (sự tự chủ độc lập)."
+                    }
+                ]
+            }
+        };
+
+        let score = 0;
+        let answeredList = {}; // Records structured as { questionId: { chosen: string, correct: boolean } }
+        let currentActiveTab = "ex3";
+
+        // BEAUTIFUL INLINE SVG GRAPHICS GENERATOR FOR EXERCISE 6
+        function makeSVGGraphic(type) {
+            switch(type) {
+                case "chess":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="10" y="10" width="80" height="80" fill="#EEEEEE" rx="10"/><rect x="25" y="25" width="25" height="25" fill="#333333"/><rect x="50" y="50" width="25" height="25" fill="#333333"/><path d="M50 20 L40 50 L60 50 Z" fill="#FFD700"/><circle cx="50" cy="18" r="4" fill="#FFD700"/></svg>`;
+                case "english":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="15" y="15" width="70" height="70" fill="#1E88E5" rx="8"/><rect x="15" y="20" width="60" height="60" fill="#BBDEFB" rx="4"/><text x="25" y="55" font-family="'Nunito'" font-size="22" font-weight="900" fill="#0D47A1">A B C</text><line x1="25" y1="65" x2="65" y2="65" stroke="#0D47A1" stroke-width="4"/><circle cx="70" cy="30" r="8" fill="#FF4757"/></svg>`;
+                case "volleyball":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><circle cx="50" cy="50" r="35" fill="#FFF176" stroke="#F57F17" stroke-width="4"/><path d="M25 35 Q50 60 75 35 M20 50 Q50 20 80 50 M35 75 Q50 40 65 75" fill="none" stroke="#F57F17" stroke-width="3"/></svg>`;
+                case "cards":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="15" y="25" width="70" height="50" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" rx="6"/><path d="M50 40 Q40 30 35 40 T50 60 Q60 50 65 40 T50 40" fill="#FF4757"/><circle cx="25" cy="35" r="3" fill="#F1C40F"/><circle cx="75" cy="35" r="3" fill="#F1C40F"/></svg>`;
+                case "study":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="25" y="20" width="50" height="60" fill="#FFFFFF" stroke="#37474F" stroke-width="4" rx="4"/><line x1="35" y1="35" x2="65" y2="35" stroke="#78909C" stroke-width="3"/><line x1="35" y1="45" x2="55" y2="45" stroke="#78909C" stroke-width="3"/><circle cx="75" cy="70" r="12" fill="#FFEB3B" opacity="0.8"/></svg>`;
+                case "singing":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="42" y="50" width="16" height="35" fill="#37474F" rx="4"/><ellipse cx="50" cy="35" rx="18" ry="22" fill="#B0BEC5" stroke="#37474F" stroke-width="3"/><path d="M30 35 H70" stroke="#37474F" stroke-width="3"/><path d="M40 85 L20 95 M60 85 L80 95" stroke="#37474F" stroke-width="4"/></svg>`;
+                case "chocolate":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><path d="M30 40 H70 V75 C70 82 60 85 50 85 C40 85 30 82 30 75 Z" fill="#D84315"/><path d="M70 45 H80 C85 45 85 60 80 60 H70" fill="none" stroke="#D84315" stroke-width="6"/><path d="M40 25 Q45 15 42 10 M50 25 Q55 15 52 10 M60 25 Q65 15 62 10" fill="none" stroke="#FF8F00" stroke-width="3"/></svg>`;
+                case "dentist":
+                    return `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><path d="M35 30 C35 15 65 15 65 30 C65 45 60 55 58 75 C55 85 45 85 42 75 C40 55 35 45 35 30 Z" fill="#FFFFFF" stroke="#00B4A2" stroke-width="4"/><circle cx="35" cy="20" r="10" fill="#FFEB3B" opacity="0.6"/></svg>`;
+                default:
+                    return '';
+            }
+        }
+
+        function setupNavigationTabs() {
+            const container = document.getElementById("tabs-container");
+            container.innerHTML = "";
+            let counter = 1;
+
+            for (const key in database) {
+                const item = database[key];
+                const cleanName = item.title.split(":")[0];
+                const tab = document.createElement("button");
+                tab.id = `tab-anchor-${key}`;
+                tab.className = `py-2.5 px-3 rounded-2xl text-xs md:text-sm font-black tab-btn border-b-4 border-black/10 active:translate-y-0.5 shadow-sm transition-all flex items-center justify-center gap-1`;
+                tab.innerHTML = `<i class="fa-solid fa-star text-yellow-300"></i> P.${counter}: ${cleanName}`;
+                tab.onclick = () => switchTab(key);
+                container.appendChild(tab);
+                counter++;
+            }
+            switchTab(currentActiveTab);
+        }
+
+        function switchTab(key) {
+            currentActiveTab = key;
+            document.querySelectorAll("#tabs-container button").forEach(b => b.classList.remove("active"));
+            const targetTab = document.getElementById(`tab-anchor-${key}`);
+            if (targetTab) targetTab.classList.add("active");
+
+            renderWorkspace(key);
+            playSound('correct');
+        }
+
+        function renderWorkspace(key) {
+            const workspace = document.getElementById("exercise-workspace");
+            const data = database[key];
+
+            let html = `
+                <div class="mb-6 border-b-2 border-dashed border-white/20 pb-4">
+                    <h2 class="text-xl md:text-2xl font-black text-white flex items-center gap-2">
+                        <span class="bg-emerald-600 text-white py-1 px-3 rounded-xl text-xs uppercase tracking-wide font-extrabold shadow-sm">Đang học</span>
+                        ${data.title}
+                    </h2>
+                    <p class="text-xs md:text-sm font-bold text-teal-950 mt-1"><i class="fa-solid fa-info-circle"></i> ${data.desc}</p>
+                </div>
+                <div class="space-y-6">
+            `;
+
+            data.questions.forEach((q, idx) => {
+                const answerStatus = answeredList[q.id];
+                let wrapClass = "bg-white/95 rounded-3xl p-5 md:p-6 shadow-md border-b-4 border-black/10 transition-all duration-300 relative";
+                
+                if (answerStatus) {
+                    wrapClass = answerStatus.correct 
+                        ? "bg-green-50 border-4 border-[#00D26A] rounded-3xl p-5 md:p-6 shadow-md relative"
+                        : "bg-red-50 border-4 border-[#FF4757] rounded-3xl p-5 md:p-6 shadow-md relative shake";
+                }
+
+                html += `
+                    <div class="${wrapClass}" id="question-card-${q.id}">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-teal-700 text-white font-extrabold px-3 py-1 rounded-xl text-xs uppercase shadow-sm">CÂU ${idx + 1}</span>
+                            ${answerStatus ? (answerStatus.correct ? '<span class="text-[#00D26A] font-black text-sm"><i class="fa-solid fa-face-laugh-beam"></i> CHÍNH XÁC!</span>' : '<span class="text-[#FF4757] font-black text-sm"><i class="fa-solid fa-face-sad-tear"></i> CHƯA ĐÚNG!</span>') : ''}
+                        </div>
+                `;
+
+                if (q.type === "mcq") {
+                    html += `<p class="text-base md:text-lg font-black text-slate-800 leading-relaxed mb-4">${q.q}</p>`;
+                    html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
+                    
+                    // Shuffle logic per session
+                    q.options.forEach(opt => {
+                        let btnStyle = "btn-answer font-extrabold p-3.5 rounded-2xl text-left border-b-4 flex items-center gap-2 text-sm md:text-base";
+                        let btnIcon = `<i class="fa-regular fa-circle text-teal-300"></i>`;
+                        let isBtnDisabled = answerStatus ? 'disabled' : '';
+
+                        if (answerStatus) {
+                            if (opt === q.answer) {
+                                btnStyle = "bg-[#00D26A] text-white font-extrabold p-3.5 rounded-2xl text-left border-b-4 border-[#009624] flex items-center gap-2 text-sm md:text-base";
+                                btnIcon = `<i class="fa-solid fa-circle-check text-white animate-bounce"></i>`;
+                            } else if (answerStatus.chosen === opt) {
+                                btnStyle = "bg-[#FF4757] text-white font-extrabold p-3.5 rounded-2xl text-left border-b-4 border-[#C2185B] flex items-center gap-2 text-sm md:text-base";
+                                btnIcon = `<i class="fa-solid fa-circle-xmark text-white"></i>`;
+                            } else {
+                                btnStyle = "bg-gray-100 border-2 border-gray-200 text-gray-400 font-bold p-3.5 rounded-2xl text-left flex items-center gap-2 opacity-60 text-sm md:text-base";
+                            }
+                        }
+
+                        html += `
+                            <button ${isBtnDisabled} onclick="checkMCQAnswer('${q.id}', '${opt}', '${q.answer}')" class="${btnStyle}">
+                                ${btnIcon} <span>${opt}</span>
+                            </button>
+                        `;
+                    });
+                    html += `</div>`;
+
+                } else if (q.type === "gapfill") {
+                    // Gapfill layout with popup dialog click
+                    let renderedSentence = q.q;
+                    const matchPattern = /\[(.*?)\]/;
+                    const patternMatch = q.q.match(matchPattern);
+                    if (patternMatch) {
+                        const activeLabel = answerStatus ? answerStatus.chosen : "Bấm vào đây để chọn từ...";
+                        const labelStyle = answerStatus 
+                            ? (answerStatus.correct ? "bg-[#00D26A] text-white border-[#009624]" : "bg-[#FF4757] text-white border-[#C2185B]")
+                            : "bg-amber-100 text-amber-900 border-amber-300 animate-pulse";
+                        
+                        const elementButton = `
+                            <button ${answerStatus ? 'disabled' : ''} onclick="openChoiceSelector('${q.id}', '${q.answer}')" class="${labelStyle} border-2 border-dashed rounded-xl px-4 py-1.5 font-black mx-1.5 transition-all transform hover:scale-[1.03] shadow-sm text-sm">
+                                ${activeLabel} <i class="fa-solid fa-caret-down text-xs ml-1"></i>
+                            </button>
+                        `;
+                        renderedSentence = q.q.replace(matchPattern, elementButton);
+                    }
+
+                    html += `
+                        <p class="text-base md:text-lg font-black text-slate-800 leading-loose mb-2">
+                            ${renderedSentence}
+                        </p>
+                    `;
+
+                } else if (q.type === "picture_select") {
+                    // Visual rendering matching Exercise 6 SVGs
+                    html += `
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <div class="w-full md:w-1/3 bg-teal-50 p-4 rounded-2xl border-2 border-teal-100 flex items-center justify-center shadow-inner">
+                                ${makeSVGGraphic(q.graphic)}
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <p class="text-base font-black text-slate-800 mb-3">${q.q.replace('[option]', '__________')}</p>
+                                <div class="relative">
+                    `;
+
+                    if (answerStatus) {
+                        const correctState = answerStatus.correct;
+                        const blockBg = correctState ? 'bg-[#00D26A] text-white border-[#009624]' : 'bg-[#FF4757] text-white border-[#C2185B]';
+                        html += `
+                            <div class="${blockBg} border-b-4 font-black p-3.5 rounded-2xl text-sm flex items-center justify-between shadow-sm">
+                                <span><i class="fa-solid fa-circle-check mr-2"></i> ${answerStatus.chosen}</span>
+                                <span class="text-xs uppercase font-black">${correctState ? 'Đúng' : 'Sai'}</span>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <button onclick="openChoiceSelector('${q.id}', '${q.answer}')" class="w-full bg-amber-50 text-amber-800 border-2 border-amber-200 hover:bg-amber-100 font-extrabold p-3.5 rounded-2xl text-left transition-all border-b-4 flex items-center justify-between shadow-sm text-sm">
+                                <span><i class="fa-solid fa-hand-pointer text-amber-500 mr-2"></i> Chọn câu lạc bộ / hoạt động...</span>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </button>
+                        `;
+                    }
+
+                    html += `
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                if (answerStatus) {
+                    html += `
+                        <div class="explanation-box mt-5">
+                            <div class="banner-instruction m-4 p-3 font-black text-xs md:text-sm text-center">
+                                ${q.type === "picture_select" ? "Hãy đối chiếu từ vựng của hoạt động xuất hiện trong tranh bên dưới:" : "Thạc sỹ Ms Lê Hằng English giải thích siêu chi tiết:"}
+                            </div>
+                            <div class="exp-content px-5 pb-5">
+                                <p class="text-slate-700 font-bold leading-relaxed text-sm md:text-base">
+                                    ${q.exp}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                html += `</div>`;
+            });
+
+            html += `</div>`;
+            workspace.innerHTML = html;
+        }
+
+        // INTERACTIVE HANDLERS FOR CHOICES
+        function checkMCQAnswer(qId, selectedOption, correctAnswer) {
+            if (answeredList[qId]) return;
+
+            const isCorrect = selectedOption === correctAnswer;
+            answeredList[qId] = {
+                correct: isCorrect,
+                chosen: selectedOption
+            };
+
+            if (isCorrect) {
+                score += 10;
+                playSound('correct');
+                spawnConfetti();
+            } else {
+                playSound('wrong');
+                const card = document.getElementById(`question-card-${qId}`);
+                if (card) {
+                    card.classList.add("shake");
+                    setTimeout(() => card.classList.remove("shake"), 400);
+                }
+            }
+
+            updateScorePanel();
+            renderWorkspace(currentActiveTab);
+        }
+
+        let activeDropdownQId = null;
+        let activeDropdownCorrectAns = null;
+
+        function openChoiceSelector(qId, correctAns) {
+            activeDropdownQId = qId;
+            activeDropdownCorrectAns = correctAns;
+
+            const anchor = document.getElementById("popup-choices-anchor");
+            anchor.innerHTML = "";
+
+            // Identify current active object details
+            let targetObject = null;
+            for (const k in database) {
+                const found = database[k].questions.find(item => item.id === qId);
+                if (found) {
+                    targetObject = found;
+                    break;
+                }
+            }
+
+            if (!targetObject) return;
+
+            const poolOptions = targetObject.options || targetObject.choices;
+            poolOptions.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.className = "w-full bg-teal-50 text-teal-950 border-2 border-teal-200 hover:bg-teal-100 font-black py-3 px-4 rounded-xl text-left border-b-4 active:translate-y-0.5 transition-all text-sm";
+                btn.innerText = opt;
+                btn.onclick = () => selectPopupChoice(opt);
+                anchor.appendChild(btn);
+            });
+
+            document.getElementById("dropdown-overlay").classList.remove("hidden");
+            setTimeout(() => {
+                document.getElementById("popup-box").classList.remove("scale-95");
+            }, 10);
+        }
+
+        function selectPopupChoice(chosenOpt) {
+            const isCorrect = chosenOpt === activeDropdownCorrectAns;
+            answeredList[activeDropdownQId] = {
+                correct: isCorrect,
+                chosen: chosenOpt
+            };
+
+            if (isCorrect) {
+                score += 10;
+                playSound('correct');
+                spawnConfetti();
+            } else {
+                playSound('wrong');
+            }
+
+            closeDropdown();
+            updateScorePanel();
+            renderWorkspace(currentActiveTab);
+        }
+
+        function closeDropdown() {
+            document.getElementById("popup-box").classList.add("scale-95");
+            setTimeout(() => {
+                document.getElementById("dropdown-overlay").classList.add("hidden");
+            }, 150);
+        }
+
+        function updateScorePanel() {
+            let totalQCount = 0;
+            for (const k in database) {
+                totalQCount += database[k].questions.length;
+            }
+            const doneCount = Object.keys(answeredList).length;
+            const currentPercentage = totalQCount > 0 ? (doneCount / totalQCount) * 100 : 0;
+            
+            document.getElementById("footer-progress-bar").style.width = `${currentPercentage}%`;
+            document.getElementById("footer-score-text").innerText = score;
+        }
+
+        function submitFinal() {
+            let totalQCount = 0;
+            for (const k in database) {
+                totalQCount += database[k].questions.length;
+            }
+            const doneCount = Object.keys(answeredList).length;
+
+            if (doneCount === 0) {
+                playSound('wrong');
+                showCommentModal("Con ơi, hãy bắt đầu thử sức làm các câu hỏi trước khi nộp bài nhé! Cố lên nào!", 0, 0, totalQCount);
+                return;
+            }
+
+            let correctCount = 0;
+            for (const key in answeredList) {
+                if (answeredList[key].correct) {
+                    correctCount++;
+                }
+            }
+
+            const percentVal = Math.round((correctCount / totalQCount) * 100);
+            let evaluation = "";
+
+            if (percentVal < 50) {
+                evaluation = "Điểm lần này chưa cao lắm, con cố gắng đọc kĩ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+                playSound('wrong');
+            } else if (percentVal >= 60 && percentVal <= 80) {
+                evaluation = "Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kĩ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+                playSound('correct');
+                spawnConfetti();
+            } else {
+                evaluation = "Làm tốt lắm, con cố gắng ring điểm 10 ở lần sau nha!";
+                playSound('correct');
+                spawnConfetti();
+                setTimeout(spawnConfetti, 1000);
+            }
+
+            showCommentModal(evaluation, percentVal, correctCount, totalQCount);
+        }
+
+        function showCommentModal(commentText, percentage, correct, total) {
+            document.getElementById("modal-score-percent").innerText = `${percentage}%`;
+            document.getElementById("modal-score-fraction").innerText = `(${correct}/${total} câu hoàn toàn chính xác)`;
+            document.getElementById("modal-comment").innerText = commentText;
+            document.getElementById("result-modal").classList.remove("hidden");
+        }
+
+        function closeResultModal() {
+            document.getElementById("result-modal").classList.add("hidden");
+        }
+
+        function restartTest() {
+            answeredList = {};
+            score = 0;
+            currentActiveTab = "ex3";
+            updateScorePanel();
+            setupNavigationTabs();
+            closeResultModal();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            setupNavigationTabs();
+            updateScorePanel();
+        }
+    </script>
+</body>
+</html>
